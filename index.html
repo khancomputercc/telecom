@@ -1038,6 +1038,122 @@
             font-size: 0.65rem;
         }
 
+        /* Service Toggle Switch */
+        .service-toggle-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            border-radius: var(--radius-full);
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        body.dark-mode .service-toggle-container {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4f 100%);
+        }
+        
+        .toggle-label {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+        
+        body.dark-mode .toggle-label { color: #f1f5f9; }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 40px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--danger);
+            transition: .3s;
+            border-radius: 40px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 32px;
+            width: 32px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--success);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(40px);
+        }
+        
+        .toggle-status {
+            font-weight: 600;
+            padding: 5px 15px;
+            border-radius: var(--radius-full);
+            background: rgba(0,0,0,0.05);
+        }
+        
+        .toggle-status.on {
+            color: var(--success);
+        }
+        
+        .toggle-status.off {
+            color: var(--danger);
+        }
+        
+        .service-off-message {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        
+        body.dark-mode .service-off-message {
+            background: #1e293b;
+        }
+        
+        .service-off-message i {
+            font-size: 4rem;
+            color: var(--danger);
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+        
+        .service-off-message h3 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        
+        .service-off-message p {
+            color: var(--text-light);
+        }
+
         /* Responsive adjustments */
         @media (max-width: 968px) {
             .nav-menu { display: none; }
@@ -1135,19 +1251,19 @@
                         <span>সব অপারেটর</span>
                     </div>
                     <div class="operator-item" data-op="Grameenphone" onclick="applyOperator('Grameenphone', this)">
-                        <div class="operator-logo"><img src="https://i.ibb.co.com/B5ws92LW/download-removebg-preview.png" width="80px" height="80px"></div>
+                        <div class="operator-logo"><img src="https://i.ibb.co.com/tw2f0V8p/download.png" width="80px" height="80px"></div>
                         <span>Grameenphone</span>
                     </div>
                     <div class="operator-item" data-op="Robi" onclick="applyOperator('Robi', this)">
-                        <div class="operator-logo"><img src="data:image/png;base64,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" width="100px" height="80px"></div>
+                        <div class="operator-logo"><img src="https://i.ibb.co.com/4gsQ2nJG/download-2.png" width="100px" height="80px"></div>
                         <span>Robi</span>
                     </div>
                     <div class="operator-item" data-op="Airtel" onclick="applyOperator('Airtel', this)">
-                        <div class="operator-logo"><img src="data:image/png;base64,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" width="70px" height="70px"></div>
+                        <div class="operator-logo"><img src="https://i.ibb.co.com/4RCzLQM0/download-1.png" width="70px" height="70px"></div>
                         <span>Airtel</span>
                     </div>
                     <div class="operator-item" data-op="Banglalink" onclick="applyOperator('Banglalink', this)">
-                        <div class="operator-logo"><img src="https://static.vecteezy.com/system/resources/thumbnails/067/936/642/small_2x/banglalink-logo-bl-sim-company-app-icon-transparent-background-free-png.png" width="90px" height="90px"></div>
+                        <div class="operator-logo"><img src="https://static.vecteezy.com/system/resources/thumbnails/067/936/642/small_2x/banglalink-logo-bl-sim-company-app-icon-transparent-background-free-png.png" width="95px" height="95px"></div>
                         <span>Banglalink</span>
                     </div>
                     <div class="operator-item" data-op="Teletalk" onclick="applyOperator('Teletalk', this)">
@@ -1200,8 +1316,23 @@
             </div>
         </section>
 
+        <!-- Service Status Indicator (shown when service is off) -->
+        <div id="serviceOffMessage" style="display: none;">
+            <div class="service-off-message">
+                <i class="fas fa-power-off"></i>
+                <h3>🔴 সার্ভিস বন্ধ আছে</h3>
+                <p class="mb-2">বর্তমানে আমাদের সার্ভিস সাময়িকভাবে বন্ধ রয়েছে।</p>
+                <p class="text-muted small">অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।</p>
+                <div class="mt-4">
+                    <span class="badge bg-warning text-dark px-4 py-2">
+                        <i class="fas fa-clock me-2"></i>শীঘ্রই আবার চালু হবে
+                    </span>
+                </div>
+            </div>
+        </div>
+
         <!-- Fluid Products Grid - 4 Columns -->
-        <div class="products-fluid">
+        <div class="products-fluid" id="productsContainer">
             <div class="products-grid" id="productContainer"></div>
         </div>
         
@@ -1228,6 +1359,24 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Service Toggle Switch -->
+            <div class="service-toggle-container">
+                <div class="d-flex align-items-center gap-3">
+                    <span class="toggle-label">
+                        <i class="fas fa-power-off me-2"></i>সার্ভিস স্ট্যাটাস
+                    </span>
+                    <span id="serviceStatusBadge" class="toggle-status on">চালু আছে</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="text-muted small">অন/অফ করে পুরো সাইটের প্রোডাক্ট ডিসপ্লে নিয়ন্ত্রণ করুন</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="serviceToggle" checked onchange="toggleService()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
             <div class="table-responsive">
                 <table class="table align-middle">
                     <thead class="table-light">
@@ -1333,7 +1482,7 @@
                     <i class="fas fa-sign-in-alt me-2"></i>লগইন করুন
                 </button>
             </form>
-            <p class="text-muted small text-center mt-3">ডিফল্ট: admin / admin123</p>
+           
         </div>
     </div>
 
@@ -1448,8 +1597,8 @@
                         </button>
                     </div>
                     
-                    <input type="text" class="form-control mb-2" placeholder="আপনার মোবাইল নাম্বার" id="userPhone">
-                    <input type="text" class="form-control mb-2" placeholder="TrxID (লেনদেন নম্বর)" id="trxId">
+                    <input type="text" class="form-control mb-2" placeholder="যে নাম্বারে অফার নিতে চান লিখুন" id="userPhone">
+                    <input type="text" class="form-control mb-2" placeholder="লাস্ট ৪ ডিজিট লিখুন (টাকা পাঠিয়েছেন)" id="trxId">
                     <select class="form-select mb-3" id="paymentMethod">
                         <option value="bKash">bKash</option>
                         <option value="Nagad">Nagad</option>
@@ -1471,47 +1620,145 @@
         // ========== DATA ==========
         let products = [];
         
-        // Generate sample products with price update dates
-        const conditions = ['all_bd', 'check_number', 'special', 'corporate', 'student'];
+        // Service state (true = ON, false = OFF)
+        let serviceEnabled = true;
         
-        for(let i = 1; i <= 45; i++) {
-            const operators = ['Grameenphone', 'Robi', 'Airtel', 'Banglalink', 'Teletalk'];
-            const categories = ['internet', 'minute', 'bundle'];
-            const operator = operators[Math.floor(Math.random() * operators.length)];
-            const cat = categories[Math.floor(Math.random() * categories.length)];
-            
-            let dataVolume;
-            if(cat === 'minute') {
-                const minutes = ['100 Min', '200 Min', '300 Min', '500 Min', '1000 Min'];
-                dataVolume = minutes[Math.floor(Math.random() * minutes.length)];
+        // Load products from localStorage or generate sample data
+        function loadProducts() {
+            const savedProducts = localStorage.getItem('rechargex_products');
+            if (savedProducts) {
+                products = JSON.parse(savedProducts);
             } else {
-                const dataVolumes = ['1 GB', '2 GB', '3 GB', '5 GB', '10 GB', '20 GB', '30 GB', '50 GB', '78 GB', '117 GB', '234 GB'];
-                dataVolume = dataVolumes[Math.floor(Math.random() * dataVolumes.length)];
+                generateSampleProducts();
+            }
+        }
+        
+        // Generate sample products with price update dates
+        function generateSampleProducts() {
+            const conditions = ['all_bd', 'check_number', 'special', 'corporate', 'student'];
+            
+            for(let i = 1; i <= 45; i++) {
+                const operators = ['Grameenphone', 'Robi', 'Airtel', 'Banglalink', 'Teletalk'];
+                const categories = ['internet', 'minute', 'bundle'];
+                const operator = operators[Math.floor(Math.random() * operators.length)];
+                const cat = categories[Math.floor(Math.random() * categories.length)];
+                
+                let dataVolume;
+                if(cat === 'minute') {
+                    const minutes = ['100 Min', '200 Min', '300 Min', '500 Min', '1000 Min'];
+                    dataVolume = minutes[Math.floor(Math.random() * minutes.length)];
+                } else {
+                    const dataVolumes = ['1 GB', '2 GB', '3 GB', '5 GB', '10 GB', '20 GB', '30 GB', '50 GB', '78 GB', '117 GB', '234 GB'];
+                    dataVolume = dataVolumes[Math.floor(Math.random() * dataVolumes.length)];
+                }
+                
+                const regularPrice = Math.floor(Math.random() * 2000) + 300;
+                const offerPrice = Math.floor(regularPrice * (0.7 + Math.random() * 0.2));
+                const validities = ['1 day', '3 days', '7 days', '30 days', '90 days'];
+                const validity = validities[Math.floor(Math.random() * validities.length)];
+                const condition = conditions[Math.floor(Math.random() * conditions.length)];
+                
+                // Random price update date (between 1-30 days ago)
+                const daysAgo = Math.floor(Math.random() * 30) + 1;
+                const priceUpdateDate = Date.now() - (daysAgo * 24 * 60 * 60 * 1000);
+                
+                products.push({
+                    id: i,
+                    operator: operator,
+                    packName: `${dataVolume.split(' ')[0]}${dataVolume.split(' ')[1]} ${cat === 'internet' ? 'Internet' : cat === 'minute' ? 'Minutes' : 'Combo'}`,
+                    dataVolume: dataVolume,
+                    regularPrice: regularPrice,
+                    offerPrice: offerPrice,
+                    validity: validity,
+                    cat: cat,
+                    condition: condition,
+                    priceUpdateDate: priceUpdateDate,
+                    date: Date.now() - i * 1000
+                });
+            }
+            saveProducts();
+        }
+
+        // Save products to localStorage
+        function saveProducts() {
+            localStorage.setItem('rechargex_products', JSON.stringify(products));
+        }
+
+        // Load service state from localStorage
+        function loadServiceState() {
+            const savedServiceState = localStorage.getItem('rechargex_service_enabled');
+            if (savedServiceState !== null) {
+                serviceEnabled = savedServiceState === 'true';
             }
             
-            const regularPrice = Math.floor(Math.random() * 2000) + 300;
-            const offerPrice = Math.floor(regularPrice * (0.7 + Math.random() * 0.2));
-            const validities = ['1 day', '3 days', '7 days', '30 days', '90 days'];
-            const validity = validities[Math.floor(Math.random() * validities.length)];
-            const condition = conditions[Math.floor(Math.random() * conditions.length)];
+            // Update toggle checkbox
+            const toggle = document.getElementById('serviceToggle');
+            if (toggle) {
+                toggle.checked = serviceEnabled;
+            }
             
-            // Random price update date (between 1-30 days ago)
-            const daysAgo = Math.floor(Math.random() * 30) + 1;
-            const priceUpdateDate = Date.now() - (daysAgo * 24 * 60 * 60 * 1000);
+            // Update badge
+            updateServiceStatusUI();
+        }
+
+        // Save service state to localStorage
+        function saveServiceState() {
+            localStorage.setItem('rechargex_service_enabled', serviceEnabled);
+        }
+
+        // Toggle service on/off
+        function toggleService() {
+            const toggle = document.getElementById('serviceToggle');
+            serviceEnabled = toggle.checked;
             
-            products.push({
-                id: i,
-                operator: operator,
-                packName: `${dataVolume.split(' ')[0]}${dataVolume.split(' ')[1]} ${cat === 'internet' ? 'Internet' : cat === 'minute' ? 'Minutes' : 'Combo'}`,
-                dataVolume: dataVolume,
-                regularPrice: regularPrice,
-                offerPrice: offerPrice,
-                validity: validity,
-                cat: cat,
-                condition: condition,
-                priceUpdateDate: priceUpdateDate, // New field for tracking price updates
-                date: Date.now() - i * 1000
-            });
+            // Save to localStorage
+            saveServiceState();
+            
+            // Update UI
+            updateServiceStatusUI();
+            
+            // Re-render products or show service off message
+            updateDisplayBasedOnService();
+            
+            // Show confirmation
+            alert(serviceEnabled ? "✅ সার্ভিস চালু করা হয়েছে" : "🔴 সার্ভিস বন্ধ করা হয়েছে");
+        }
+
+        // Update service status UI elements
+        function updateServiceStatusUI() {
+            const badge = document.getElementById('serviceStatusBadge');
+            if (badge) {
+                badge.className = `toggle-status ${serviceEnabled ? 'on' : 'off'}`;
+                badge.innerHTML = serviceEnabled ? 'চালু আছে' : 'বন্ধ আছে';
+            }
+        }
+
+        // Update display based on service state
+        function updateDisplayBasedOnService() {
+            const productsContainer = document.getElementById('productsContainer');
+            const serviceOffMessage = document.getElementById('serviceOffMessage');
+            const filterSection = document.querySelector('.filter-section');
+            const moreOffersContainer = document.getElementById('moreOffersContainer');
+            
+            if (!serviceEnabled) {
+                // Hide products and filters, show service off message
+                if (productsContainer) productsContainer.style.display = 'none';
+                if (moreOffersContainer) moreOffersContainer.style.display = 'none';
+                if (filterSection) filterSection.style.opacity = '0.5';
+                if (filterSection) filterSection.style.pointerEvents = 'none';
+                if (serviceOffMessage) serviceOffMessage.style.display = 'block';
+            } else {
+                // Show products and filters, hide service off message
+                if (productsContainer) productsContainer.style.display = 'block';
+                if (filterSection) {
+                    filterSection.style.opacity = '1';
+                    filterSection.style.pointerEvents = 'all';
+                }
+                if (serviceOffMessage) serviceOffMessage.style.display = 'none';
+                
+                // Re-render products
+                renderProducts(true);
+            }
         }
 
         // State
@@ -1528,6 +1775,92 @@
         let selectedPack = null;
         let editingId = null;
         let modalInstance;
+
+        // ========== PERSISTENT ADMIN LOGIN ==========
+        // Check localStorage for existing login session
+        function checkAdminLogin() {
+            const savedLogin = localStorage.getItem('rechargex_admin_loggedin');
+            if (savedLogin === 'true') {
+                isAdminLoggedIn = true;
+                
+                // Update footer button
+                const footerBtn = document.getElementById('footerAdminBtn');
+                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
+                footerBtn.style.color = '#ef4444';
+                
+                // Show admin panel
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminTable();
+                
+                // Load service state and update toggle
+                loadServiceState();
+            }
+        }
+
+        // ========== ADMIN LOGIN WITH PASSWORD ==========
+        function openAdminLoginModal() {
+            if(isAdminLoggedIn) {
+                // If already logged in, logout instead
+                logoutAdmin();
+            } else {
+                // Show login modal
+                document.getElementById('adminLoginModal').style.display = 'flex';
+            }
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('adminLoginModal').style.display = 'none';
+        }
+
+        function adminLoginWithPassword(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Check credentials (you can change these)
+            if(username === 'admin' && password === '@Rk9748') {
+                isAdminLoggedIn = true;
+                
+                // Save login state to localStorage
+                localStorage.setItem('rechargex_admin_loggedin', 'true');
+                
+                closeAdminLoginModal();
+                
+                // Update footer button
+                const footerBtn = document.getElementById('footerAdminBtn');
+                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
+                footerBtn.style.color = '#ef4444';
+                
+                // Show admin panel
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminTable();
+                
+                // Load service state
+                loadServiceState();
+                
+                alert("✅ অ্যাডমিন লগইন সফল!");
+            } else {
+                alert("❌ ভুল ইউজারনেম অথবা পাসওয়ার্ড!");
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            
+            // Remove login state from localStorage
+            localStorage.removeItem('rechargex_admin_loggedin');
+            
+            // Update footer button
+            const footerBtn = document.getElementById('footerAdminBtn');
+            footerBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন';
+            footerBtn.style.color = '#94a3b8';
+            
+            // Hide admin panel
+            document.getElementById('adminPanel').style.display = 'none';
+            
+            alert("👋 অ্যাডমিন লগআউট করা হয়েছে");
+        }
         
         // Pagination
         let displayedProducts = 16;
@@ -1598,63 +1931,14 @@
             return `${day}/${month}/${year}`;
         }
 
-        // ========== ADMIN LOGIN WITH PASSWORD ==========
-        function openAdminLoginModal() {
-            if(isAdminLoggedIn) {
-                // If already logged in, logout instead
-                logoutAdmin();
-            } else {
-                // Show login modal
-                document.getElementById('adminLoginModal').style.display = 'flex';
-            }
-        }
-
-        function closeAdminLoginModal() {
-            document.getElementById('adminLoginModal').style.display = 'none';
-        }
-
-        function adminLoginWithPassword(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('adminUsername').value;
-            const password = document.getElementById('adminPassword').value;
-            
-            // Check credentials (you can change these)
-            if(username === 'admin' && password === 'admin123') {
-                isAdminLoggedIn = true;
-                closeAdminLoginModal();
-                
-                // Update footer button
-                const footerBtn = document.getElementById('footerAdminBtn');
-                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
-                footerBtn.style.color = '#ef4444';
-                
-                // Show admin panel
-                document.getElementById('adminPanel').style.display = 'block';
-                renderAdminTable();
-                
-                alert("✅ অ্যাডমিন লগইন সফল!");
-            } else {
-                alert("❌ ভুল ইউজারনেম অথবা পাসওয়ার্ড!");
-            }
-        }
-
-        function logoutAdmin() {
-            isAdminLoggedIn = false;
-            
-            // Update footer button
-            const footerBtn = document.getElementById('footerAdminBtn');
-            footerBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন';
-            footerBtn.style.color = '#94a3b8';
-            
-            // Hide admin panel
-            document.getElementById('adminPanel').style.display = 'none';
-            
-            alert("👋 অ্যাডমিন লগআউট করা হয়েছে");
-        }
-
         // ========== RENDER PRODUCTS ==========
         function renderProducts(resetPagination = true) {
+            // If service is off, don't render products
+            if (!serviceEnabled) {
+                updateDisplayBasedOnService();
+                return;
+            }
+            
             if(resetPagination) {
                 displayedProducts = productsPerPage;
             }
@@ -1761,12 +2045,14 @@
 
         // Load more products
         function loadMoreProducts() {
+            if (!serviceEnabled) return;
             displayedProducts += productsPerPage;
             renderProducts(false);
         }
 
         // ========== FILTER FUNCTIONS ==========
         function applyOperator(op, element) {
+            if (!serviceEnabled) return;
             document.querySelectorAll('.operator-item').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
             filters.op = op;
@@ -1774,30 +2060,21 @@
         }
 
         function applyCategory(cat, element) {
+            if (!serviceEnabled) return;
             document.querySelectorAll('.category-item').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
             filters.cat = cat;
             renderProducts();
         }
 
-        function applyPriceRange(price, btn) {
-            document.querySelectorAll('.price-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            if(price === 'all') {
-                filters.maxPrice = 3000;
-            } else {
-                filters.maxPrice = parseInt(price);
-            }
-            renderProducts();
-        }
-
         function applyValidityFilter() {
+            if (!serviceEnabled) return;
             filters.validity = document.getElementById('validitySelect').value;
             renderProducts();
         }
 
         function applySort() {
+            if (!serviceEnabled) return;
             filters.sort = document.getElementById('sortSelect').value;
             renderProducts();
         }
@@ -1904,6 +2181,7 @@
         // Search with debounce
         let searchTimeout;
         document.getElementById('searchInput')?.addEventListener('input', (e) => {
+            if (!serviceEnabled) return;
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(() => {
                 filters.search = e.target.value;
@@ -1913,6 +2191,11 @@
 
         // ========== CHECKOUT & WHATSAPP ==========
         function openCheckout(id) {
+            if (!serviceEnabled) {
+                alert("🔴 সার্ভিস বর্তমানে বন্ধ আছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।");
+                return;
+            }
+            
             selectedPack = products.find(p => p.id === id);
             if(!selectedPack) return;
             
@@ -1945,15 +2228,12 @@
             
             // Smart formatted message with emojis
             const message = `🛒 *নতুন অর্ডার*\n\n` +
-                `👤 *নাম্বার:* ${phone}\n` +
+                `👤 *অফার নাম্বার:* ${phone}\n` +
                 `📦 *প্যাক:* ${selectedPack.dataVolume} ${selectedPack.packName}\n` +
                 `📡 *অপারেটর:* ${selectedPack.operator}\n` +
                 `⏰ *মেয়াদ:* ${selectedPack.validity}\n` +
                 `💰 *মূল্য:* ৳${selectedPack.offerPrice}\n` +
-                `${savings > 0 ? `🎁 *ছাড়:* ৳${savings} সাশ্রিত\n` : ''}` +
-                `📋 *কন্ডিশন:* ${conditionText}\n` +
-                `💳 *পেমেন্ট:* ${method} - 01927671975\n` +
-                `🧾 *TrxID:* ${trx}\n\n` +
+                `🧾 *লাস্ট নাম্বার:* ${trx}\n\n` +
                 `✅ অনুগ্রহ করে আমার অর্ডার কনফার্ম করুন! 🙏`;
             
             // Encode for URL
@@ -2045,6 +2325,9 @@
                 if(idx !== -1) products[idx] = { ...products[idx], ...newData, id: editingId };
             }
             
+            // Save to localStorage
+            saveProducts();
+            
             renderProducts();
             renderAdminTable();
             closePopup();
@@ -2055,6 +2338,10 @@
             if(!isAdminLoggedIn) return;
             if(confirm("এই প্যাকটি ডিলিট করতে চান?")) {
                 products = products.filter(p => p.id !== id);
+                
+                // Save to localStorage
+                saveProducts();
+                
                 renderProducts();
                 renderAdminTable();
             }
@@ -2123,11 +2410,21 @@
 
         // Init
         document.addEventListener('DOMContentLoaded', () => {
-            renderProducts();
-            modalInstance = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            loadProducts(); // Load from localStorage
+            loadServiceState(); // Load service state from localStorage
             
-            // Hide admin panel initially
-            document.getElementById('adminPanel').style.display = 'none';
+            // Check if user was logged in from previous session
+            checkAdminLogin();
+            
+            // Initialize display based on service state
+            updateDisplayBasedOnService();
+            
+            // Only render products if service is enabled
+            if (serviceEnabled) {
+                renderProducts();
+            }
+            
+            modalInstance = new bootstrap.Modal(document.getElementById('checkoutModal'));
         });
     </script>
 </body>
