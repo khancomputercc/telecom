@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeX Pro | Best Internet Packs in Bangladesh</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- SolaimanLipi Font for Bengali -->
+    <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --gp: #008a3c; --robi: #ed1c24; --airtel: #ff0000; --bl: #fbb03b; --tele: #009ca6;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius-xl: 24px; --radius-full: 9999px;
+        }
+        body {
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+        body.dark-mode .top-nav { background: #1e293b; border-color: #334155; }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .nav-brand {
+            font-family: 'Poppins', 'SolaimanLipi', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        body.dark-mode .nav-menu a { color: #f1f5f9; }
+        
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+        
+        .nav-menu a:hover::after { width: 100%; }
+        
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+        
+        body.dark-mode .mobile-menu-btn { color: #f1f5f9; }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-section h1 {
+            font-family: 'Poppins', 'SolaimanLipi', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        /* Advanced Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 30px;
+            margin: -40px auto 40px;
+            max-width: 1400px;
+            width: 95%;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 10;
+        }
+        
+        body.dark-mode .filter-section { background: #1e293b; }
+        
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-wrapper {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            transition: 0.3s;
+            background: var(--light-bg);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .search-input {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: 12px 20px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-full);
+            background: white;
+            font-weight: 600;
+            cursor: pointer;
+            min-width: 180px;
+            transition: 0.3s;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .filter-select {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Operator Filter with Logos */
+        .operator-filter-wrapper {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            padding: 25px 20px;
+            border-radius: 60px;
+            margin-bottom: 25px;
+        }
+        body.dark-mode .operator-filter-wrapper {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4f 100%);
+        }
+        
+        .operator-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .operator-item {
+            flex: 1;
+            min-width: 100px;
+            max-width: 140px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .operator-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+          
+            transition: 0.3s;
+            
+        }
+        
+        body.dark-mode .operator-logo {
+            background: #0f172a;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+        
+        /* Operator-specific logo colors when active */
+        .operator-item[data-op="Grameenphone"].active .operator-logo { background: var(--gp); color: white; border-color: var(--gp); }
+        .operator-item[data-op="Robi"].active .operator-logo { background: var(--robi); color: white; border-color: var(--robi); }
+        .operator-item[data-op="Airtel"].active .operator-logo { background: var(--airtel); color: white; border-color: var(--airtel); }
+        .operator-item[data-op="Banglalink"].active .operator-logo { background: var(--bl); color: #1e293b; border-color: var(--bl); }
+        .operator-item[data-op="Teletalk"].active .operator-logo { background: var(--tele); color: white; border-color: var(--tele); }
+        .operator-item[data-op="all"].active .operator-logo { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        .operator-item.active .operator-logo {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(99,102,241,0.3);
+        }
+        
+        .operator-item span {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        body.dark-mode .operator-item span { color: #f1f5f9; }
+
+        /* Smart Category Filter */
+        .category-filter-wrapper {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            padding: 25px 20px;
+            border-radius: 60px;
+            margin-bottom: 25px;
+        }
+        body.dark-mode .category-filter-wrapper {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4f 100%);
+        }
+        
+        .category-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .category-item {
+            flex: 1;
+            min-width: 140px;
+            max-width: 200px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2.2rem;
+            color: var(--primary);
+            border: 3px solid var(--border);
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        body.dark-mode .category-icon {
+            background: #0f172a;
+            border-color: #475569;
+            color: var(--primary);
+        }
+        
+        .category-item.active .category-icon {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(99,102,241,0.3);
+        }
+        
+        .category-item span {
+            display: block;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        body.dark-mode .category-item span { color: #f1f5f9; }
+        
+        .category-item small {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+
+        /* Price Range Filter with Buttons */
+        .price-range-wrapper {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 60px;
+            margin-bottom: 25px;
+        }
+        body.dark-mode .price-range-wrapper { background: #0f172a; }
+        
+        .price-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .price-btn {
+            padding: 12px 24px;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 90px;
+            color: var(--text-main);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        body.dark-mode .price-btn {
+            background: #0f172a;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+        
+        .price-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .price-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Active Filters */
+        .active-filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+        
+        .active-filter-chip {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .active-filter-chip .remove-chip {
+            cursor: pointer;
+            opacity: 0.8;
+            transition: 0.2s;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .active-filter-chip .remove-chip:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        /* Results Info */
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 2px solid var(--border);
+        }
+        
+        .results-count {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .results-count strong {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .reset-filters-btn {
+            background: var(--light-bg);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .reset-filters-btn {
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+        
+        .reset-filters-btn:hover {
+            background: var(--danger);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Fluid Product Grid - 4 Columns */
+        .products-fluid {
+            width: 100%;
+            padding: 0 15px;
+            margin: 0 auto 30px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+        
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body.dark-mode .product-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--danger);
+            color: white;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 2;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .operator-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: white;
+            align-self: flex-start;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .op-gp { background: var(--gp); }
+        .op-robi { background: var(--robi); }
+        .op-airtel { background: var(--airtel); }
+        .op-bl { background: var(--bl); color: #1e293b; }
+        .op-tele { background: var(--tele); }
+        
+        .data-volume {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--text-main);
+            margin: 8px 0;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .data-volume { color: #f1f5f9; }
+        
+        .data-unit {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-light);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .pack-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .pricing-section {
+            background: var(--light-bg);
+            padding: 12px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+        
+        body.dark-mode .pricing-section { background: #0f172a; }
+        
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .regular-price {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-decoration: line-through;
+            font-weight: 500;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .offer-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--success);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .savings-text {
+            font-size: 0.8rem;
+            color: var(--success);
+            font-weight: 600;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .validity-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .validity-badge {
+            background: white;
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-main);
+            border: 2px solid var(--border);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .validity-badge {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        
+        .category-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            align-self: flex-start;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .cat-internet { background: #dbeafe; color: #2563eb; }
+        .cat-minute { background: #dcfce7; color: #16a34a; }
+        .cat-bundle { background: #ffedd5; color: #ea580c; }
+        
+        .order-btn {
+            width: 100%;
+            background: var(--text-main);
+            color: white;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            margin-top: auto;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .order-btn {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+        
+        .order-btn:hover {
+            background: var(--primary);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(99,102,241,0.4);
+        }
+
+        /* More Offers Button */
+        .more-offers-container {
+            text-align: center;
+            margin: 40px auto 60px;
+        }
+        
+        .more-offers-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: var(--radius-full);
+            font-weight: 800;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(99,102,241,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .more-offers-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(99,102,241,0.4);
+        }
+        
+        .more-offers-btn i {
+            transition: 0.3s;
+        }
+        
+        .more-offers-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Admin Panel */
+        .admin-section {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
+            width: 95%;
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+        
+        body.dark-mode .admin-section { background: #1e293b; }
+
+        /* Admin Login Modal */
+        .admin-login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2100;
+        }
+        
+        .admin-login-content {
+            background: white;
+            border-radius: 32px;
+            max-width: 400px;
+            width: 90%;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease;
+        }
+        
+        body.dark-mode .admin-login-content { background: #1e293b; }
+
+        /* Footer */
+        .site-footer {
+            background: var(--text-main);
+            color: white;
+            padding: 60px 20px 30px;
+            margin-top: auto;
+        }
+        
+        body.dark-mode .site-footer { background: #020617; }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-family: 'Poppins', 'SolaimanLipi', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-section p {
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .footer-bottom strong {
+            color: var(--primary);
+        }
+
+        /* Popup Modal */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .popup-content {
+            background: white;
+            border-radius: 32px;
+            max-width: 650px;
+            width: 95%;
+            padding: 35px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease;
+        }
+        
+        body.dark-mode .popup-content { background: #1e293b; }
+        
+        @keyframes popIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Enhanced Form Styles */
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-main);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        body.dark-mode .form-label { color: #f1f5f9; }
+        
+        .form-control, .form-select {
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 12px 15px;
+            transition: 0.3s;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+        }
+
+        /* Condition Badge */
+        .condition-badge {
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            margin-left: 8px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+
+        /* Last Update Badge for Admin Panel */
+        .last-update-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 8px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .last-update-badge i {
+            margin-right: 4px;
+            font-size: 0.65rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 968px) {
+            .nav-menu { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero-section h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="navbar-custom">
+                <a href="#" class="nav-brand">
+                    <i class="fas fa-bolt"></i>
+                    RechargeX Pro
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="#" class="active"><i class="fas fa-home me-1"></i>Home</a></li>
+                    <li><a href="#packs"><i class="fas fa-sim-card me-1"></i>All Packs</a></li>
+                    <li><a href="#offers"><i class="fas fa-tags me-1"></i>Hot Offers</a></li>
+                    <li><a href="#operators"><i class="fas fa-signal me-1"></i>Operators</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="btn btn-light rounded-circle px-3" onclick="toggleDarkMode()" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn btn-primary rounded-pill px-4" onclick="window.location.href='#packs'">
+                        <i class="fas fa-shopping-cart me-2"></i>Order Now
+                    </button>
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>🔥 সেরা ইন্টারনেট অফার</h1>
+            <p>সব অপারেটরের ড্রাইভ প্যাক এক ছাদের নিচে। রেগুলার প্রাইসের চেয়ে কম দামে কিনুন!</p>
+            <button class="btn btn-light btn-lg rounded-pill px-5 fw-bold" onclick="document.getElementById('packs').scrollIntoView({behavior: 'smooth'})">
+                <i class="fas fa-shopping-bag me-2"></i>অফার দেখুন
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container-fluid px-0">
+        
+        <!-- Advanced Filter Section -->
+        <section class="filter-section" id="packs">
+            
+            <!-- Search & Sort -->
+            <div class="filter-header">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" id="searchInput" placeholder="প্যাক খুঁজুন (নাম্বার, অপারেটর, ডাটা...)">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                
+                <div class="filter-controls">
+                    <select class="filter-select" id="sortSelect" onchange="applySort()">
+                        <option value="popular">🔥 জনপ্রিয়</option>
+                        <option value="price-low">💰 দাম: কম থেকে বেশি</option>
+                        <option value="price-high">💎 দাম: বেশি থেকে কম</option>
+                        <option value="discount">🏷️ সর্বোচ্চ ছাড়</option>
+                        <option value="newest">✨ নতুন</option>
+                    </select>
+                    
+                    <select class="filter-select" id="validitySelect" onchange="applyValidityFilter()">
+                        <option value="all">⏰ সব মেয়াদ</option>
+                        <option value="1">১ দিন</option>
+                        <option value="3">৩ দিন</option>
+                        <option value="7">৭ দিন</option>
+                        <option value="30">৩০ দিন</option>
+                        <option value="90">৯০ দিন</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Operator Filter with Logos -->
+            <div class="operator-filter-wrapper">
+                <div class="filter-group-label mb-3">
+                    <i class="fas fa-signal"></i> অপারেটর নির্বাচন করুন
+                </div>
+                <div class="operator-grid" id="operatorGrid">
+                    <div class="operator-item active" data-op="all" onclick="applyOperator('all', this)">
+                        <div class="operator-logo"><i class="fas fa-th-large"></i></div>
+                        <span>সব অপারেটর</span>
+                    </div>
+                    <div class="operator-item" data-op="Grameenphone" onclick="applyOperator('Grameenphone', this)">
+                        <div class="operator-logo"><img src="https://i.ibb.co.com/B5ws92LW/download-removebg-preview.png" width="80px" height="80px"></div>
+                        <span>Grameenphone</span>
+                    </div>
+                    <div class="operator-item" data-op="Robi" onclick="applyOperator('Robi', this)">
+                        <div class="operator-logo"><img src="data:image/png;base64,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" width="100px" height="80px"></div>
+                        <span>Robi</span>
+                    </div>
+                    <div class="operator-item" data-op="Airtel" onclick="applyOperator('Airtel', this)">
+                        <div class="operator-logo"><img src="data:image/png;base64,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" width="70px" height="70px"></div>
+                        <span>Airtel</span>
+                    </div>
+                    <div class="operator-item" data-op="Banglalink" onclick="applyOperator('Banglalink', this)">
+                        <div class="operator-logo"><img src="https://static.vecteezy.com/system/resources/thumbnails/067/936/642/small_2x/banglalink-logo-bl-sim-company-app-icon-transparent-background-free-png.png" width="90px" height="90px"></div>
+                        <span>Banglalink</span>
+                    </div>
+                    <div class="operator-item" data-op="Teletalk" onclick="applyOperator('Teletalk', this)">
+                        <div class="operator-logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWOWa16gwbz4XKaEJvSrZSI1j36NSfmH3Xcw&s" width="70px" height="70px"></div>
+                        <span>Teletalk</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Category Filter -->
+            <div class="category-filter-wrapper">
+                <div class="filter-group-label mb-3">
+                    <i class="fas fa-tags"></i> প্যাকের ধরন নির্বাচন করুন
+                </div>
+                <div class="category-grid" id="categoryGrid">
+                    <div class="category-item active" data-cat="all" onclick="applyCategory('all', this)">
+                        <div class="category-icon"><i class="fas fa-layer-group"></i></div>
+                        <span>সব প্যাক</span>
+                        <small>All Packages</small>
+                    </div>
+                    <div class="category-item" data-cat="internet" onclick="applyCategory('internet', this)">
+                        <div class="category-icon"><i class="fas fa-wifi"></i></div>
+                        <span>ইন্টারনেট</span>
+                        <small>Data & Internet</small>
+                    </div>
+                    <div class="category-item" data-cat="minute" onclick="applyCategory('minute', this)">
+                        <div class="category-icon"><i class="fas fa-phone-volume"></i></div>
+                        <span>মিনিট</span>
+                        <small>Talktime</small>
+                    </div>
+                    <div class="category-item" data-cat="bundle" onclick="applyCategory('bundle', this)">
+                        <div class="category-icon"><i class="fas fa-gift"></i></div>
+                        <span>কম্বো</span>
+                        <small>Combo Offers</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Filters -->
+            <div class="active-filters-container" id="activeFilters"></div>
+
+            <!-- Results Info -->
+            <div class="results-info">
+                <div class="results-count">
+                    মোট <strong id="resultCount">0</strong>টি প্যাক পাওয়া গেছে (দেখানো হচ্ছে <span id="displayCount">0</span>টি)
+                </div>
+                <button class="reset-filters-btn" onclick="resetAllFilters()">
+                    <i class="fas fa-undo"></i> সব রিসেট করুন
+                </button>
+            </div>
+        </section>
+
+        <!-- Fluid Products Grid - 4 Columns -->
+        <div class="products-fluid">
+            <div class="products-grid" id="productContainer"></div>
+        </div>
+        
+        <!-- More Offers Button -->
+        <div class="more-offers-container" id="moreOffersContainer">
+            <button class="more-offers-btn" id="moreOffersBtn" onclick="loadMoreProducts()">
+                <i class="fas fa-plus-circle"></i> আরও অফার দেখুন (১৫)
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Admin Panel (Hidden by default) -->
+        <section class="admin-section" id="adminPanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold mb-0">
+                    <i class="fas fa-crown text-warning me-2"></i>প্রোডাক্ট ম্যানেজার
+                </h4>
+                <div>
+                    <button class="btn btn-success rounded-pill px-4 me-2" onclick="openAddPopup()">
+                        <i class="fas fa-plus me-2"></i>নতুন প্যাক
+                    </button>
+                    <button class="btn btn-outline-danger rounded-pill px-4" onclick="logoutAdmin()">
+                        <i class="fas fa-sign-out-alt me-2"></i>লগআউট
+                    </button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>অপারেটর</th>
+                            <th>প্যাক</th>
+                            <th>ডাটা/মিনিট</th>
+                            <th>রেগুলার</th>
+                            <th>অফার</th>
+                            <th>ছাড়</th>
+                            <th>মেয়াদ</th>
+                            <th>কন্ডিশন</th>
+                            <th>সর্বশেষ মূল্য আপডেট</th>
+                            <th>অ্যাকশন</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTable"></tbody>
+                </table>
+            </div>
+            <div class="text-muted small mt-3">
+                <i class="fas fa-info-circle me-1"></i> 
+                সর্বশেষ মূল্য আপডেটের তারিখ দেখায় কবে প্যাকের দাম শেষ পরিবর্তন করা হয়েছে।
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer with Admin Login Toggle -->
+    <footer class="site-footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3><i class="fas fa-bolt me-2"></i>RechargeX Pro</h3>
+                    <p>বাংলাদেশের সবচেয়ে নির্ভরযোগ্য এবং সাশ্রয়ী মোবাইল রিচার্জ প্ল্যাটফর্ম। সব অপারেটরের সেরা অফার এক জায়গায়।</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>দ্রুত লিংক</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right"></i> আমাদের সম্পর্কে</a></li>
+                        <li><a href="#packs"><i class="fas fa-angle-right"></i> সব প্যাক</a></li>
+                        <li><a href="#offers"><i class="fas fa-angle-right"></i> বিশেষ অফার</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> রিফান্ড পলিসি</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> শর্তাবলী</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>অপারেটর</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Grameenphone</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Robi</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Airtel</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Banglalink</a></li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i> Teletalk</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>যোগাযোগ</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:01927671975"><i class="fas fa-phone"></i> 01927671975</a></li>
+                        <li><a href="mailto:support@rechargex.pro"><i class="fas fa-envelope"></i> support@rechargex.pro</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> ঢাকা, বাংলাদেশ</a></li>
+                        <li><a href="https://wa.me/8801927671975"><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপে যোগাযোগ</a></li>
+                        <!-- Admin Login/Logout Toggle Button -->
+                        <li><a href="#" onclick="openAdminLoginModal()" id="footerAdminBtn"><i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 <strong>RechargeX Pro</strong> | সর্বস্বত্ব সংরক্ষিত | Designed with <i class="fas fa-heart text-danger"></i> in Bangladesh</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal (Password Protected) -->
+    <div class="admin-login-modal" id="adminLoginModal">
+        <div class="admin-login-content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold mb-0"><i class="fas fa-lock me-2"></i>অ্যাডমিন লগইন</h4>
+                <button class="btn btn-light rounded-circle" onclick="closeAdminLoginModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form onsubmit="adminLoginWithPassword(event)">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">ইউজারনেম</label>
+                    <input type="text" class="form-control" id="adminUsername" placeholder="admin" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label fw-bold">পাসওয়ার্ড</label>
+                    <input type="password" class="form-control" id="adminPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold">
+                    <i class="fas fa-sign-in-alt me-2"></i>লগইন করুন
+                </button>
+            </form>
+            <p class="text-muted small text-center mt-3">ডিফল্ট: admin / admin123</p>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Popup -->
+    <div class="popup-overlay" id="productPopup">
+        <div class="popup-content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold mb-0" id="popupTitle">নতুন প্যাক যোগ করুন</h4>
+                <button class="btn btn-light rounded-circle" onclick="closePopup()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="productForm" onsubmit="saveProduct(event)" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold">অপারেটর</label>
+                    <select class="form-select" id="popupOperator" required>
+                        <option value="Grameenphone">Grameenphone</option>
+                        <option value="Robi">Robi</option>
+                        <option value="Airtel">Airtel</option>
+                        <option value="Banglalink">Banglalink</option>
+                        <option value="Teletalk">Teletalk</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label class="form-label small fw-bold">ক্যাটাগরি</label>
+                    <select class="form-select" id="popupCategory" required onchange="toggleVolumeField()">
+                        <option value="internet">ইন্টারনেট</option>
+                        <option value="minute">মিনিট</option>
+                        <option value="bundle">কম্বো</option>
+                    </select>
+                </div>
+                
+                <div class="col-12">
+                    <label class="form-label small fw-bold">প্যাকের নাম</label>
+                    <input type="text" class="form-control" id="popupPackName" placeholder="যেমন: 30GB Only" required>
+                </div>
+                
+                <div class="col-6">
+                    <label class="form-label small fw-bold" id="volumeLabel">ডাটা ভলিউম</label>
+                    <input type="text" class="form-control" id="popupData" placeholder="30 GB" required>
+                </div>
+                
+                <div class="col-6">
+                    <label class="form-label small fw-bold">মেয়াদ</label>
+                    <input type="text" class="form-control" id="popupValidity" placeholder="30 days" required>
+                </div>
+                
+                <div class="col-6">
+                    <label class="form-label small fw-bold">রেগুলার দাম (৳)</label>
+                    <input type="number" class="form-control" id="popupRegularPrice" placeholder="700" required>
+                </div>
+                
+                <div class="col-6">
+                    <label class="form-label small fw-bold">অফার দাম (৳)</label>
+                    <input type="number" class="form-control" id="popupOfferPrice" placeholder="598" required>
+                </div>
+                
+                <!-- Condition Dropdown -->
+                <div class="col-12">
+                    <label class="form-label small fw-bold">কন্ডিশন <span class="condition-badge">নতুন</span></label>
+                    <select class="form-select" id="popupCondition" required>
+                        <option value="all_bd">🇧🇩 অল বাংলাদেশ (All BD)</option>
+                        <option value="check_number">📞 চেক নাম্বার (Check Number)</option>
+                        <option value="special">✨ স্পেশাল অফার</option>
+                        <option value="corporate">🏢 কর্পোরেট</option>
+                        <option value="student">🎓 স্টুডেন্ট</option>
+                    </select>
+                    <small class="text-muted">প্যাকটি কোন শর্তে প্রযোজ্য তা নির্বাচন করুন</small>
+                </div>
+                
+                <div class="col-12 mt-4">
+                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold">
+                        <i class="fas fa-save me-2"></i>সেভ করুন
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 24px;">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="fw-bold">
+                        <i class="fas fa-shield-alt text-primary me-2"></i>অর্ডার কনফার্ম করুন
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center mb-3">
+                        <span class="badge bg-primary px-4 py-2 rounded-pill" id="modalOpBadge">Operator</span>
+                    </div>
+                    <h4 class="fw-bold text-center mb-1" id="modalPackName">Pack Name</h4>
+                    
+                    <div class="bg-light p-4 rounded-4 my-3 text-center">
+                        <p class="mb-1 text-muted small">অফার মূল্য</p>
+                        <h2 class="fw-bold text-success mb-0" id="modalPrice">0৳</h2>
+                        <small class="text-danger" id="modalSavings">ডিসকাউন্ট ৳0</small>
+                        <div class="mt-2" id="modalCondition"></div>
+                    </div>
+                    
+                    <div class="bg-primary-subtle p-3 rounded-4 text-center mb-3">
+                        <p class="mb-2 fw-semibold small">এই নাম্বারে সেন্ড মানি করুন</p>
+                        <h3 class="fw-bold mb-2">01927671975</h3>
+                        <span class="badge bg-danger me-1">bKash</span>
+                        <span class="badge bg-warning text-dark">Nagad</span>
+                        <button class="btn btn-sm btn-outline-primary mt-2 rounded-pill" onclick="copyNumber()">
+                            <i class="far fa-copy me-1"></i>কপি করুন
+                        </button>
+                    </div>
+                    
+                    <input type="text" class="form-control mb-2" placeholder="আপনার মোবাইল নাম্বার" id="userPhone">
+                    <input type="text" class="form-control mb-2" placeholder="TrxID (লেনদেন নম্বর)" id="trxId">
+                    <select class="form-select mb-3" id="paymentMethod">
+                        <option value="bKash">bKash</option>
+                        <option value="Nagad">Nagad</option>
+                        <option value="Rocket">Rocket</option>
+                    </select>
+                    
+                    <button class="btn btn-success w-100 py-3 rounded-4 fw-bold" onclick="confirmOrderWA()">
+                        <i class="fab fa-whatsapp me-2"></i>হোয়াটসঅ্যাপে কনফার্ম করুন
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ========== DATA ==========
+        let products = [];
+        
+        // Generate sample products with price update dates
+        const conditions = ['all_bd', 'check_number', 'special', 'corporate', 'student'];
+        
+        for(let i = 1; i <= 45; i++) {
+            const operators = ['Grameenphone', 'Robi', 'Airtel', 'Banglalink', 'Teletalk'];
+            const categories = ['internet', 'minute', 'bundle'];
+            const operator = operators[Math.floor(Math.random() * operators.length)];
+            const cat = categories[Math.floor(Math.random() * categories.length)];
+            
+            let dataVolume;
+            if(cat === 'minute') {
+                const minutes = ['100 Min', '200 Min', '300 Min', '500 Min', '1000 Min'];
+                dataVolume = minutes[Math.floor(Math.random() * minutes.length)];
+            } else {
+                const dataVolumes = ['1 GB', '2 GB', '3 GB', '5 GB', '10 GB', '20 GB', '30 GB', '50 GB', '78 GB', '117 GB', '234 GB'];
+                dataVolume = dataVolumes[Math.floor(Math.random() * dataVolumes.length)];
+            }
+            
+            const regularPrice = Math.floor(Math.random() * 2000) + 300;
+            const offerPrice = Math.floor(regularPrice * (0.7 + Math.random() * 0.2));
+            const validities = ['1 day', '3 days', '7 days', '30 days', '90 days'];
+            const validity = validities[Math.floor(Math.random() * validities.length)];
+            const condition = conditions[Math.floor(Math.random() * conditions.length)];
+            
+            // Random price update date (between 1-30 days ago)
+            const daysAgo = Math.floor(Math.random() * 30) + 1;
+            const priceUpdateDate = Date.now() - (daysAgo * 24 * 60 * 60 * 1000);
+            
+            products.push({
+                id: i,
+                operator: operator,
+                packName: `${dataVolume.split(' ')[0]}${dataVolume.split(' ')[1]} ${cat === 'internet' ? 'Internet' : cat === 'minute' ? 'Minutes' : 'Combo'}`,
+                dataVolume: dataVolume,
+                regularPrice: regularPrice,
+                offerPrice: offerPrice,
+                validity: validity,
+                cat: cat,
+                condition: condition,
+                priceUpdateDate: priceUpdateDate, // New field for tracking price updates
+                date: Date.now() - i * 1000
+            });
+        }
+
+        // State
+        let filters = { 
+            op: 'all', 
+            cat: 'all', 
+            search: '', 
+            sort: 'popular',
+            maxPrice: 3000,
+            validity: 'all'
+        };
+        
+        let isAdminLoggedIn = false;
+        let selectedPack = null;
+        let editingId = null;
+        let modalInstance;
+        
+        // Pagination
+        let displayedProducts = 16;
+        const productsPerPage = 16;
+
+        // ========== HELPER FUNCTIONS ==========
+        function calculateDiscount(regular, offer) {
+            return Math.round(((regular - offer) / regular) * 100);
+        }
+
+        function getValidityDays(validityStr) {
+            const match = validityStr.match(/(\d+)/);
+            return match ? parseInt(match[1]) : 0;
+        }
+
+        function getConditionText(condition) {
+            const conditions = {
+                'all_bd': '🇧🇩 অল বাংলাদেশ',
+                'check_number': '📞 চেক নাম্বার',
+                'special': '✨ স্পেশাল অফার',
+                'corporate': '🏢 কর্পোরেট',
+                'student': '🎓 স্টুডেন্ট'
+            };
+            return conditions[condition] || condition;
+        }
+
+        function toggleVolumeField() {
+            const cat = document.getElementById('popupCategory').value;
+            const volumeLabel = document.getElementById('volumeLabel');
+            const volumeInput = document.getElementById('popupData');
+            
+            if(cat === 'minute') {
+                volumeLabel.innerText = 'মিনিট ভলিউম';
+                volumeInput.placeholder = '100 Min';
+            } else {
+                volumeLabel.innerText = 'ডাটা ভলিউম';
+                volumeInput.placeholder = '30 GB';
+            }
+        }
+
+        // Format date for display
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            // If less than 24 hours, show hours
+            if (diffDays === 0) {
+                const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+                if (diffHours === 0) {
+                    const diffMinutes = Math.ceil(diffTime / (1000 * 60));
+                    return `${diffMinutes} মিনিট আগে`;
+                }
+                return `${diffHours} ঘন্টা আগে`;
+            }
+            
+            // If less than 7 days, show days
+            if (diffDays < 7) {
+                return `${diffDays} দিন আগে`;
+            }
+            
+            // Otherwise show full date
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        // ========== ADMIN LOGIN WITH PASSWORD ==========
+        function openAdminLoginModal() {
+            if(isAdminLoggedIn) {
+                // If already logged in, logout instead
+                logoutAdmin();
+            } else {
+                // Show login modal
+                document.getElementById('adminLoginModal').style.display = 'flex';
+            }
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('adminLoginModal').style.display = 'none';
+        }
+
+        function adminLoginWithPassword(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Check credentials (you can change these)
+            if(username === 'admin' && password === 'admin123') {
+                isAdminLoggedIn = true;
+                closeAdminLoginModal();
+                
+                // Update footer button
+                const footerBtn = document.getElementById('footerAdminBtn');
+                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
+                footerBtn.style.color = '#ef4444';
+                
+                // Show admin panel
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminTable();
+                
+                alert("✅ অ্যাডমিন লগইন সফল!");
+            } else {
+                alert("❌ ভুল ইউজারনেম অথবা পাসওয়ার্ড!");
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            
+            // Update footer button
+            const footerBtn = document.getElementById('footerAdminBtn');
+            footerBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন';
+            footerBtn.style.color = '#94a3b8';
+            
+            // Hide admin panel
+            document.getElementById('adminPanel').style.display = 'none';
+            
+            alert("👋 অ্যাডমিন লগআউট করা হয়েছে");
+        }
+
+        // ========== RENDER PRODUCTS ==========
+        function renderProducts(resetPagination = true) {
+            if(resetPagination) {
+                displayedProducts = productsPerPage;
+            }
+            
+            const container = document.getElementById('productContainer');
+            container.innerHTML = '';
+            
+            let filtered = products.filter(p => {
+                const opMatch = filters.op === 'all' || p.operator === filters.op;
+                const catMatch = filters.cat === 'all' || p.cat === filters.cat;
+                const priceMatch = p.offerPrice <= filters.maxPrice;
+                const validityMatch = filters.validity === 'all' || 
+                    (filters.validity === '1' && getValidityDays(p.validity) === 1) ||
+                    (filters.validity === '3' && getValidityDays(p.validity) === 3) ||
+                    (filters.validity === '7' && getValidityDays(p.validity) === 7) ||
+                    (filters.validity === '30' && getValidityDays(p.validity) === 30) ||
+                    (filters.validity === '90' && getValidityDays(p.validity) === 90);
+                
+                const searchMatch = !filters.search || 
+                    p.packName.toLowerCase().includes(filters.search.toLowerCase()) ||
+                    p.operator.toLowerCase().includes(filters.search.toLowerCase()) ||
+                    p.dataVolume.toLowerCase().includes(filters.search.toLowerCase());
+                
+                return opMatch && catMatch && priceMatch && validityMatch && searchMatch;
+            });
+
+            // Apply sorting
+            if(filters.sort === 'price-low') filtered.sort((a,b) => a.offerPrice - b.offerPrice);
+            else if(filters.sort === 'price-high') filtered.sort((a,b) => b.offerPrice - a.offerPrice);
+            else if(filters.sort === 'discount') filtered.sort((a,b) => calculateDiscount(b.regularPrice, b.offerPrice) - calculateDiscount(a.regularPrice, a.offerPrice));
+            else if(filters.sort === 'newest') filtered.sort((a,b) => b.date - a.date);
+
+            const totalCount = filtered.length;
+            const productsToShow = filtered.slice(0, displayedProducts);
+
+            document.getElementById('resultCount').innerText = totalCount;
+            document.getElementById('displayCount').innerText = Math.min(displayedProducts, totalCount);
+
+            // Show/hide more offers button
+            const moreBtnContainer = document.getElementById('moreOffersContainer');
+            if(displayedProducts >= totalCount) {
+                moreBtnContainer.style.display = 'none';
+            } else {
+                moreBtnContainer.style.display = 'block';
+            }
+
+            if(productsToShow.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search fa-4x text-muted mb-3 opacity-25"></i>
+                        <h5 class="text-muted">কোনো প্যাক পাওয়া যায়নি</h5>
+                        <p class="text-muted small">অনুগ্রহ করে ফিল্টার পরিবর্তন করুন</p>
+                    </div>`;
+                updateActiveFilters();
+                return;
+            }
+
+            productsToShow.forEach(p => {
+                const discount = calculateDiscount(p.regularPrice, p.offerPrice);
+                const savings = p.regularPrice - p.offerPrice;
+                const opClass = `op-${p.operator.toLowerCase().replace('grameenphone','gp').replace('banglalink','bl')}`;
+                const catClass = `cat-${p.cat}`;
+                const catName = p.cat === 'internet' ? 'ইন্টারনেট' : p.cat === 'minute' ? 'মিনিট' : 'কম্বো';
+                const conditionText = getConditionText(p.condition);
+                
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    ${discount > 0 ? `<span class="discount-badge">-${discount}%</span>` : ''}
+                    <span class="operator-badge ${opClass}">
+                        <i class="fas fa-signal"></i> ${p.operator}
+                    </span>
+                    <span class="category-tag ${catClass}">${catName}</span>
+                    
+                    <div class="data-volume">${p.dataVolume.split(' ')[0]}<span class="data-unit">${p.dataVolume.split(' ')[1]||''}</span></div>
+                    <div class="pack-title">${p.packName}</div>
+                    
+                    <div class="pricing-section">
+                        <div class="price-row">
+                            <span class="regular-price">৳${p.regularPrice}</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="offer-price">৳${p.offerPrice}</span>
+                        </div>
+                        ${savings > 0 ? `<div class="savings-text"><i class="fas fa-check-circle me-1"></i>ডিসকা ৳${savings}</div>` : ''}
+                        <div class="mt-2 small fw-bold text-primary">
+                            <i class="fas fa-info-circle"></i> ${conditionText}
+                        </div>
+                    </div>
+                    
+                    <div class="validity-info">
+                        <span class="validity-badge"><i class="far fa-clock me-1"></i>${p.validity}</span>
+                    </div>
+                    
+                    <button class="order-btn" onclick="openCheckout(${p.id})">
+                        <i class="fas fa-shopping-cart"></i> অর্ডার করুন - ৳${p.offerPrice}
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+            
+            updateActiveFilters();
+        }
+
+        // Load more products
+        function loadMoreProducts() {
+            displayedProducts += productsPerPage;
+            renderProducts(false);
+        }
+
+        // ========== FILTER FUNCTIONS ==========
+        function applyOperator(op, element) {
+            document.querySelectorAll('.operator-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            filters.op = op;
+            renderProducts();
+        }
+
+        function applyCategory(cat, element) {
+            document.querySelectorAll('.category-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            filters.cat = cat;
+            renderProducts();
+        }
+
+        function applyPriceRange(price, btn) {
+            document.querySelectorAll('.price-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            if(price === 'all') {
+                filters.maxPrice = 3000;
+            } else {
+                filters.maxPrice = parseInt(price);
+            }
+            renderProducts();
+        }
+
+        function applyValidityFilter() {
+            filters.validity = document.getElementById('validitySelect').value;
+            renderProducts();
+        }
+
+        function applySort() {
+            filters.sort = document.getElementById('sortSelect').value;
+            renderProducts();
+        }
+
+        function updateActiveFilters() {
+            const container = document.getElementById('activeFilters');
+            container.innerHTML = '';
+            
+            if(filters.op !== 'all') {
+                container.innerHTML += `
+                    <span class="active-filter-chip">
+                        <i class="fas fa-signal"></i> ${filters.op}
+                        <span class="remove-chip" onclick="removeFilter('op')"><i class="fas fa-times"></i></span>
+                    </span>`;
+            }
+            if(filters.cat !== 'all') {
+                const catName = filters.cat === 'internet' ? 'ইন্টারনেট' : filters.cat === 'minute' ? 'মিনিট' : 'কম্বো';
+                container.innerHTML += `
+                    <span class="active-filter-chip">
+                        <i class="fas fa-tag"></i> ${catName}
+                        <span class="remove-chip" onclick="removeFilter('cat')"><i class="fas fa-times"></i></span>
+                    </span>`;
+            }
+            if(filters.maxPrice < 3000) {
+                container.innerHTML += `
+                    <span class="active-filter-chip">
+                        <i class="fas fa-tag"></i> সর্বোচ্চ ৳${filters.maxPrice}
+                        <span class="remove-chip" onclick="removeFilter('price')"><i class="fas fa-times"></i></span>
+                    </span>`;
+            }
+            if(filters.validity !== 'all') {
+                container.innerHTML += `
+                    <span class="active-filter-chip">
+                        <i class="far fa-clock"></i> ${filters.validity} দিন
+                        <span class="remove-chip" onclick="removeFilter('validity')"><i class="fas fa-times"></i></span>
+                    </span>`;
+            }
+            if(filters.search) {
+                container.innerHTML += `
+                    <span class="active-filter-chip">
+                        <i class="fas fa-search"></i> "${filters.search}"
+                        <span class="remove-chip" onclick="removeFilter('search')"><i class="fas fa-times"></i></span>
+                    </span>`;
+            }
+        }
+
+        function removeFilter(type) {
+            if(type === 'op') {
+                filters.op = 'all';
+                document.querySelectorAll('.operator-item').forEach(el => {
+                    if(el.dataset.op === 'all') el.classList.add('active');
+                    else el.classList.remove('active');
+                });
+            }
+            if(type === 'cat') {
+                filters.cat = 'all';
+                document.querySelectorAll('.category-item').forEach(el => {
+                    if(el.dataset.cat === 'all') el.classList.add('active');
+                    else el.classList.remove('active');
+                });
+            }
+            if(type === 'price') {
+                filters.maxPrice = 3000;
+                document.querySelectorAll('.price-btn').forEach(b => {
+                    if(b.dataset.price === 'all') b.classList.add('active');
+                    else b.classList.remove('active');
+                });
+            }
+            if(type === 'validity') {
+                filters.validity = 'all';
+                document.getElementById('validitySelect').value = 'all';
+            }
+            if(type === 'search') {
+                filters.search = '';
+                document.getElementById('searchInput').value = '';
+            }
+            renderProducts();
+        }
+
+        function resetAllFilters() {
+            filters = { op: 'all', cat: 'all', search: '', sort: 'popular', maxPrice: 3000, validity: 'all' };
+            document.getElementById('searchInput').value = '';
+            document.getElementById('validitySelect').value = 'all';
+            document.getElementById('sortSelect').value = 'popular';
+            
+            document.querySelectorAll('.operator-item').forEach(el => {
+                if(el.dataset.op === 'all') el.classList.add('active');
+                else el.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.category-item').forEach(el => {
+                if(el.dataset.cat === 'all') el.classList.add('active');
+                else el.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.price-btn').forEach(b => {
+                if(b.dataset.price === 'all') b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            
+            renderProducts();
+        }
+
+        // Search with debounce
+        let searchTimeout;
+        document.getElementById('searchInput')?.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                filters.search = e.target.value;
+                renderProducts();
+            }, 300);
+        });
+
+        // ========== CHECKOUT & WHATSAPP ==========
+        function openCheckout(id) {
+            selectedPack = products.find(p => p.id === id);
+            if(!selectedPack) return;
+            
+            const discount = calculateDiscount(selectedPack.regularPrice, selectedPack.offerPrice);
+            const savings = selectedPack.regularPrice - selectedPack.offerPrice;
+            const conditionText = getConditionText(selectedPack.condition);
+            
+            document.getElementById('modalOpBadge').innerText = selectedPack.operator;
+            document.getElementById('modalPackName').innerText = selectedPack.packName;
+            document.getElementById('modalPrice').innerText = `৳${selectedPack.offerPrice}`;
+            document.getElementById('modalSavings').innerHTML = savings > 0 ? `ডিসকাউন্ট ৳${savings} (${discount}% ছাড়)` : '';
+            document.getElementById('modalCondition').innerHTML = `<span class="badge bg-primary">${conditionText}</span>`;
+            
+            modalInstance.show();
+        }
+
+        function copyNumber() {
+            navigator.clipboard.writeText("01927671975");
+            alert("নাম্বার কপি করা হয়েছে! ✅");
+        }
+
+        function confirmOrderWA() {
+            if(!selectedPack) return;
+            
+            const phone = document.getElementById('userPhone').value || "N/A";
+            const trx = document.getElementById('trxId').value || "Pending";
+            const method = document.getElementById('paymentMethod').value;
+            const savings = selectedPack.regularPrice - selectedPack.offerPrice;
+            const conditionText = getConditionText(selectedPack.condition);
+            
+            // Smart formatted message with emojis
+            const message = `🛒 *নতুন অর্ডার*\n\n` +
+                `👤 *নাম্বার:* ${phone}\n` +
+                `📦 *প্যাক:* ${selectedPack.dataVolume} ${selectedPack.packName}\n` +
+                `📡 *অপারেটর:* ${selectedPack.operator}\n` +
+                `⏰ *মেয়াদ:* ${selectedPack.validity}\n` +
+                `💰 *মূল্য:* ৳${selectedPack.offerPrice}\n` +
+                `${savings > 0 ? `🎁 *ছাড়:* ৳${savings} সাশ্রিত\n` : ''}` +
+                `📋 *কন্ডিশন:* ${conditionText}\n` +
+                `💳 *পেমেন্ট:* ${method} - 01927671975\n` +
+                `🧾 *TrxID:* ${trx}\n\n` +
+                `✅ অনুগ্রহ করে আমার অর্ডার কনফার্ম করুন! 🙏`;
+            
+            // Encode for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/8801927671975?text=${encodedMessage}`, '_blank');
+            
+            // Close modal
+            bootstrap.Modal.getInstance(document.getElementById('checkoutModal')).hide();
+        }
+
+        // ========== ADMIN FUNCTIONS ==========
+        function openAddPopup() {
+            if(!isAdminLoggedIn) { 
+                alert("⚠️ অনুগ্রহ করে প্রথমে অ্যাডমিন লগইন করুন!"); 
+                return; 
+            }
+            editingId = null;
+            document.getElementById('popupTitle').innerText = 'নতুন প্যাক যোগ করুন';
+            document.getElementById('productForm').reset();
+            document.getElementById('popupOperator').value = 'Grameenphone';
+            document.getElementById('popupCategory').value = 'internet';
+            document.getElementById('popupCondition').value = 'all_bd';
+            toggleVolumeField();
+            document.getElementById('productPopup').style.display = 'flex';
+        }
+
+        function openEditPopup(id) {
+            if(!isAdminLoggedIn) { 
+                alert("⚠️ অনুগ্রহ করে প্রথমে অ্যাডমিন লগইন করুন!"); 
+                return; 
+            }
+            const p = products.find(x => x.id === id);
+            if(!p) return;
+            editingId = id;
+            document.getElementById('popupTitle').innerText = 'প্যাক এডিট করুন';
+            document.getElementById('popupOperator').value = p.operator;
+            document.getElementById('popupCategory').value = p.cat;
+            document.getElementById('popupPackName').value = p.packName;
+            document.getElementById('popupData').value = p.dataVolume;
+            document.getElementById('popupValidity').value = p.validity;
+            document.getElementById('popupRegularPrice').value = p.regularPrice;
+            document.getElementById('popupOfferPrice').value = p.offerPrice;
+            document.getElementById('popupCondition').value = p.condition || 'all_bd';
+            toggleVolumeField();
+            document.getElementById('productPopup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('productPopup').style.display = 'none';
+        }
+
+        function saveProduct(e) {
+            e.preventDefault();
+            
+            // Check if price has changed
+            let priceUpdateDate = Date.now();
+            
+            if (editingId !== null) {
+                const existingProduct = products.find(p => p.id === editingId);
+                if (existingProduct) {
+                    // If price hasn't changed, keep the old update date
+                    if (existingProduct.regularPrice === parseInt(document.getElementById('popupRegularPrice').value) &&
+                        existingProduct.offerPrice === parseInt(document.getElementById('popupOfferPrice').value)) {
+                        priceUpdateDate = existingProduct.priceUpdateDate;
+                    }
+                }
+            }
+            
+            const newData = {
+                operator: document.getElementById('popupOperator').value,
+                cat: document.getElementById('popupCategory').value,
+                packName: document.getElementById('popupPackName').value.trim(),
+                dataVolume: document.getElementById('popupData').value.trim(),
+                validity: document.getElementById('popupValidity').value.trim(),
+                regularPrice: parseInt(document.getElementById('popupRegularPrice').value),
+                offerPrice: parseInt(document.getElementById('popupOfferPrice').value),
+                condition: document.getElementById('popupCondition').value,
+                priceUpdateDate: priceUpdateDate,
+                date: Date.now()
+            };
+
+            if(editingId === null) {
+                newData.id = Date.now();
+                products.unshift(newData);
+            } else {
+                const idx = products.findIndex(p => p.id === editingId);
+                if(idx !== -1) products[idx] = { ...products[idx], ...newData, id: editingId };
+            }
+            
+            renderProducts();
+            renderAdminTable();
+            closePopup();
+            alert("প্যাক সফলভাবে সেভ করা হয়েছে! ✨");
+        }
+
+        function deleteProduct(id) {
+            if(!isAdminLoggedIn) return;
+            if(confirm("এই প্যাকটি ডিলিট করতে চান?")) {
+                products = products.filter(p => p.id !== id);
+                renderProducts();
+                renderAdminTable();
+            }
+        }
+
+        function renderAdminTable() {
+            let html = '';
+            products.slice(0, 20).forEach(p => {
+                const discount = calculateDiscount(p.regularPrice, p.offerPrice);
+                const conditionText = getConditionText(p.condition);
+                const updateDate = formatDate(p.priceUpdateDate);
+                
+                // Determine if price was updated recently (within last 7 days)
+                const isRecent = p.priceUpdateDate && (Date.now() - p.priceUpdateDate) < 7 * 24 * 60 * 60 * 1000;
+                
+                html += `<tr>
+                    <td><small class="text-muted">#${p.id}</small></td>
+                    <td><span class="badge bg-light text-dark border">${p.operator}</span></td>
+                    <td>${p.packName}</td>
+                    <td>${p.dataVolume}</td>
+                    <td class="text-decoration-line-through text-muted">৳${p.regularPrice}</td>
+                    <td class="fw-bold text-success">৳${p.offerPrice}</td>
+                    <td><span class="badge bg-danger">-${discount}%</span></td>
+                    <td>${p.validity}</td>
+                    <td><span class="badge bg-info">${conditionText}</span></td>
+                    <td>
+                        <span class="last-update-badge ${isRecent ? 'bg-success' : ''}">
+                            <i class="fas fa-clock"></i> ${updateDate}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill me-1" onclick="openEditPopup(${p.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="deleteProduct(${p.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>`;
+            });
+            document.getElementById('adminTable').innerHTML = html;
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.fa-moon');
+            if(icon) {
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Close popup when clicking outside
+        document.getElementById('productPopup')?.addEventListener('click', (e) => {
+            if(e.target.id === 'productPopup') closePopup();
+        });
+
+        document.getElementById('adminLoginModal')?.addEventListener('click', (e) => {
+            if(e.target.id === 'adminLoginModal') closeAdminLoginModal();
+        });
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            modalInstance = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            
+            // Hide admin panel initially
+            document.getElementById('adminPanel').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
