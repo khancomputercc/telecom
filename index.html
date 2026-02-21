@@ -1459,7 +1459,7 @@
                     <small class="text-muted d-block mt-1" id="lastSyncTime">সর্বশেষ সিঙ্ক: -</small>
                 </div>
                 
-                <!-- GitHub Configuration Form (প্রি-ফিল করা) -->
+                <!-- GitHub Configuration Form -->
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label small fw-bold">GitHub Token</label>
@@ -1735,7 +1735,7 @@
         // ========== DATA ==========
         let products = [];
         
-        // Service state (true = ON, false = OFF) - localStorage থেকে লোড হবে
+        // Service state (true = ON, false = OFF)
         let serviceEnabled = true;
         
         // GitHub Gist Configuration
@@ -1745,94 +1745,64 @@
             filename: 'rechargex_products.json'
         };
         
-        // ========== SERVICE STATE MANAGEMENT (ফিক্সড) ==========
+        // ========== SERVICE STATE MANAGEMENT ==========
         
-        // Service state load করুন localStorage থেকে
         function loadServiceState() {
             const savedServiceState = localStorage.getItem('rechargex_service_enabled');
-            console.log('Loading service state from localStorage:', savedServiceState);
             
             if (savedServiceState !== null) {
                 serviceEnabled = savedServiceState === 'true';
             } else {
-                // প্রথমবার use করলে default true
                 serviceEnabled = true;
                 localStorage.setItem('rechargex_service_enabled', 'true');
             }
             
-            console.log('Service enabled:', serviceEnabled);
-            
-            // Update toggle checkbox
             const toggle = document.getElementById('serviceToggle');
             if (toggle) {
                 toggle.checked = serviceEnabled;
-                console.log('Toggle set to:', toggle.checked);
             }
             
-            // Update badge
             updateServiceStatusUI();
             
             return serviceEnabled;
         }
 
-        // Service state save করুন localStorage-এ
         function saveServiceState() {
-            console.log('Saving service state:', serviceEnabled);
             localStorage.setItem('rechargex_service_enabled', serviceEnabled);
-            
-            // verify
-            const saved = localStorage.getItem('rechargex_service_enabled');
-            console.log('Verified saved state:', saved);
         }
 
-        // Toggle service on/off (ফিক্সড)
         function toggleService() {
             const toggle = document.getElementById('serviceToggle');
             if (!toggle) return;
             
             serviceEnabled = toggle.checked;
-            console.log('Toggle changed to:', serviceEnabled);
             
-            // Save to localStorage
             saveServiceState();
-            
-            // Update UI
             updateServiceStatusUI();
-            
-            // Update display
             updateDisplayBasedOnService();
             
-            // Show confirmation
             alert(serviceEnabled ? "✅ সার্ভিস চালু করা হয়েছে" : "🔴 সার্ভিস বন্ধ করা হয়েছে");
             
-            // Force re-render
             if (serviceEnabled) {
                 renderProducts(true);
             }
         }
 
-        // Update service status UI elements
         function updateServiceStatusUI() {
             const badge = document.getElementById('serviceStatusBadge');
             if (badge) {
                 badge.className = `toggle-status ${serviceEnabled ? 'on' : 'off'}`;
                 badge.innerHTML = serviceEnabled ? 'চালু আছে' : 'বন্ধ আছে';
-                console.log('Badge updated to:', badge.innerHTML);
             }
         }
 
-        // Update display based on service state (ফিক্সড)
         function updateDisplayBasedOnService() {
             const productsContainer = document.getElementById('productsContainer');
             const serviceOffMessage = document.getElementById('serviceOffMessage');
             const filterSection = document.querySelector('.filter-section');
             const moreOffersContainer = document.getElementById('moreOffersContainer');
             
-            console.log('Updating display, serviceEnabled:', serviceEnabled);
-            
             if (!serviceEnabled) {
-                // Service OFF - hide products, show message
-                console.log('Service OFF - hiding products');
                 if (productsContainer) productsContainer.style.display = 'none';
                 if (moreOffersContainer) moreOffersContainer.style.display = 'none';
                 if (filterSection) {
@@ -1841,11 +1811,8 @@
                 }
                 if (serviceOffMessage) {
                     serviceOffMessage.style.display = 'block';
-                    console.log('Service off message shown');
                 }
             } else {
-                // Service ON - show products, hide message
-                console.log('Service ON - showing products');
                 if (productsContainer) productsContainer.style.display = 'block';
                 if (filterSection) {
                     filterSection.style.opacity = '1';
@@ -1853,7 +1820,6 @@
                 }
                 if (serviceOffMessage) serviceOffMessage.style.display = 'none';
                 
-                // Re-render products
                 renderProducts(true);
             }
         }
@@ -2144,7 +2110,6 @@
         }
 
         function generateSampleProducts() {
-            console.log('Generating sample products...');
             const conditions = ['all_bd', 'check_number', 'special', 'corporate', 'student'];
             
             for(let i = 1; i <= 45; i++) {
@@ -2600,7 +2565,7 @@
             }
         }
 
-        // ========== ADMIN FUNCTIONS ==========
+        // ========== FIXED ADMIN FUNCTIONS ==========
         function openAddPopup() {
             if(!isAdminLoggedIn) { 
                 alert("⚠️ অনুগ্রহ করে প্রথমে অ্যাডমিন লগইন করুন!"); 
@@ -2714,16 +2679,33 @@
             renderProducts();
             renderAdminTable();
             closePopup();
-            alert("প্যাক সফলভাবে সেভ করা হয়েছে! ✨");
+            alert("✅ প্যাক সফলভাবে সেভ করা হয়েছে!");
         }
 
+        // ========== FIXED DELETE FUNCTION ==========
         function deleteProduct(id) {
-            if(!isAdminLoggedIn) return;
-            if(confirm("এই প্যাকটি ডিলিট করতে চান?")) {
+            if (!isAdminLoggedIn) return;
+            
+            if (confirm("এই প্যাকটি ডিলিট করতে চান?")) {
+                // products array থেকে আইটেম রিমুভ
                 products = products.filter(p => p.id !== id);
+                
+                // localStorage আপডেট
                 saveProducts();
+                
+                // UI আপডেট
                 renderProducts();
                 renderAdminTable();
+                
+                alert("✅ প্যাক ডিলিট করা হয়েছে! পরিবর্তনগুলি স্থায়ী করতে GitHub-এ আপলোড করুন।");
+                
+                // GitHub Gist আপডেট করার অপশন
+                if (githubConfig.token && githubConfig.gistId) {
+                    const confirmUpload = confirm("পরিবর্তনগুলি কি GitHub Gist-এ আপলোড করবেন?");
+                    if (confirmUpload) {
+                        pushToGist();
+                    }
+                }
             }
         }
 
@@ -2879,12 +2861,10 @@
 
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', async () => {
-            console.log('Page loaded, initializing...');
             showLoading(true);
             
             // প্রথমে service state লোড করুন
             loadServiceState();
-            console.log('Initial service state:', serviceEnabled);
             
             // GitHub config লোড করুন
             loadGithubConfig();
@@ -2910,7 +2890,6 @@
             }
             
             showLoading(false);
-            console.log('Initialization complete, service enabled:', serviceEnabled);
         });
     </script>
 </body>
