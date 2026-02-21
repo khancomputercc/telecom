@@ -15,7 +15,6 @@
     <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
     
     <style>
-        /* আপনার আগের সব স্টাইল একই থাকবে */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #6366f1;
@@ -43,8 +42,12 @@
             display: flex;
             flex-direction: column;
         }
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+        }
         
-        /* টপ নেভিগেশন */
+        /* Top Navigation */
         .top-nav {
             background: white;
             border-bottom: 1px solid var(--border);
@@ -54,6 +57,7 @@
             z-index: 1000;
             box-shadow: var(--shadow-sm);
         }
+        body.dark-mode .top-nav { background: #1e293b; border-color: #334155; }
         
         .nav-container {
             max-width: 1400px;
@@ -99,6 +103,8 @@
             padding: 5px 0;
         }
         
+        body.dark-mode .nav-menu a { color: #f1f5f9; }
+        
         .nav-menu a:hover, .nav-menu a.active {
             color: var(--primary);
         }
@@ -130,8 +136,10 @@
             cursor: pointer;
             color: var(--text-main);
         }
+        
+        body.dark-mode .mobile-menu-btn { color: #f1f5f9; }
 
-        /* হিরো সেকশন */
+        /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
@@ -139,6 +147,29 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .hero-section h1 {
@@ -154,7 +185,7 @@
             margin-bottom: 30px;
         }
 
-        /* ফিল্টার সেকশন */
+        /* Advanced Filter Section */
         .filter-section {
             background: white;
             border-radius: var(--radius-xl);
@@ -166,6 +197,8 @@
             position: relative;
             z-index: 10;
         }
+        
+        body.dark-mode .filter-section { background: #1e293b; }
         
         .filter-header {
             display: flex;
@@ -191,6 +224,12 @@
             transition: 0.3s;
             background: var(--light-bg);
             font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .search-input {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
         }
         
         .search-input:focus {
@@ -224,13 +263,27 @@
             transition: 0.3s;
             font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
+        
+        body.dark-mode .filter-select {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
 
-        /* অপারেটর ফিল্টার */
+        /* Operator Filter with Logos */
         .operator-filter-wrapper {
             background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
             padding: 25px 20px;
             border-radius: 60px;
             margin-bottom: 25px;
+        }
+        body.dark-mode .operator-filter-wrapper {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4f 100%);
         }
         
         .operator-grid {
@@ -260,27 +313,48 @@
             font-size: 2rem;
             font-weight: 800;
             color: var(--text-main);
+          
             transition: 0.3s;
+            
         }
         
-        .operator-item[data-op="Grameenphone"].active .operator-logo { background: #008a3c; color: white; }
-        .operator-item[data-op="Robi"].active .operator-logo { background: #ed1c24; color: white; }
-        .operator-item[data-op="Airtel"].active .operator-logo { background: #ff0000; color: white; }
-        .operator-item[data-op="Banglalink"].active .operator-logo { background: #fbb03b; color: #1e293b; }
-        .operator-item[data-op="Teletalk"].active .operator-logo { background: #009ca6; color: white; }
-        .operator-item[data-op="all"].active .operator-logo { background: #6366f1; color: white; }
+        body.dark-mode .operator-logo {
+            background: #0f172a;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+        
+        /* Operator-specific logo colors when active */
+        .operator-item[data-op="Grameenphone"].active .operator-logo { background: var(--gp); color: white; border-color: var(--gp); }
+        .operator-item[data-op="Robi"].active .operator-logo { background: var(--robi); color: white; border-color: var(--robi); }
+        .operator-item[data-op="Airtel"].active .operator-logo { background: var(--airtel); color: white; border-color: var(--airtel); }
+        .operator-item[data-op="Banglalink"].active .operator-logo { background: var(--bl); color: #1e293b; border-color: var(--bl); }
+        .operator-item[data-op="Teletalk"].active .operator-logo { background: var(--tele); color: white; border-color: var(--tele); }
+        .operator-item[data-op="all"].active .operator-logo { background: var(--primary); color: white; border-color: var(--primary); }
         
         .operator-item.active .operator-logo {
             transform: scale(1.05);
             box-shadow: 0 15px 25px rgba(99,102,241,0.3);
         }
+        
+        .operator-item span {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        body.dark-mode .operator-item span { color: #f1f5f9; }
 
-        /* ক্যাটাগরি ফিল্টার */
+        /* Smart Category Filter */
         .category-filter-wrapper {
             background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
             padding: 25px 20px;
             border-radius: 60px;
             margin-bottom: 25px;
+        }
+        body.dark-mode .category-filter-wrapper {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4f 100%);
         }
         
         .category-grid {
@@ -309,27 +383,50 @@
             justify-content: center;
             margin: 0 auto 15px;
             font-size: 2.2rem;
-            color: #6366f1;
-            border: 3px solid #e2e8f0;
+            color: var(--primary);
+            border: 3px solid var(--border);
             transition: 0.3s;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
+        body.dark-mode .category-icon {
+            background: #0f172a;
+            border-color: #475569;
+            color: var(--primary);
+        }
         
         .category-item.active .category-icon {
-            background: #6366f1;
+            background: var(--primary);
             color: white;
-            border-color: #6366f1;
+            border-color: var(--primary);
             transform: scale(1.05);
             box-shadow: 0 15px 25px rgba(99,102,241,0.3);
         }
+        
+        .category-item span {
+            display: block;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        body.dark-mode .category-item span { color: #f1f5f9; }
+        
+        .category-item small {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
 
-        /* প্রাইস রেঞ্জ */
+        /* Price Range Filter with Buttons */
         .price-range-wrapper {
-            background: #f8fafc;
+            background: var(--light-bg);
             padding: 20px;
             border-radius: 60px;
             margin-bottom: 25px;
         }
+        body.dark-mode .price-range-wrapper { background: #0f172a; }
         
         .price-buttons {
             display: flex;
@@ -340,26 +437,37 @@
         
         .price-btn {
             padding: 12px 24px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border);
             background: white;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
             min-width: 90px;
-            color: #1e293b;
+            color: var(--text-main);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        body.dark-mode .price-btn {
+            background: #0f172a;
+            border-color: #475569;
+            color: #f1f5f9;
         }
         
         .price-btn.active {
-            background: #6366f1;
+            background: var(--primary);
             color: white;
-            border-color: #6366f1;
+            border-color: var(--primary);
             box-shadow: 0 4px 12px rgba(99,102,241,0.3);
             transform: translateY(-2px);
         }
+        
+        .price-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
 
-        /* একটিভ ফিল্টার */
+        /* Active Filters */
         .active-filters-container {
             display: flex;
             flex-wrap: wrap;
@@ -369,10 +477,10 @@
         }
         
         .active-filter-chip {
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             padding: 8px 16px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-size: 0.85rem;
             font-weight: 600;
             display: flex;
@@ -380,52 +488,78 @@
             gap: 8px;
             animation: slideIn 0.3s ease;
             box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(-10px) scale(0.9); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
+        
+        .active-filter-chip .remove-chip {
+            cursor: pointer;
+            opacity: 0.8;
+            transition: 0.2s;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .active-filter-chip .remove-chip:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
 
-        /* রেজাল্ট ইনফো */
+        /* Results Info */
         .results-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-top: 20px;
-            border-top: 2px solid #e2e8f0;
+            border-top: 2px solid var(--border);
         }
         
         .results-count {
             font-size: 1rem;
-            color: #64748b;
+            color: var(--text-light);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .results-count strong {
-            color: #6366f1;
+            color: var(--primary);
             font-size: 1.3rem;
         }
         
         .reset-filters-btn {
-            background: #f8fafc;
+            background: var(--light-bg);
             border: none;
             padding: 10px 20px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .reset-filters-btn {
+            background: #0f172a;
+            color: #f1f5f9;
         }
         
         .reset-filters-btn:hover {
-            background: #ef4444;
+            background: var(--danger);
             color: white;
             transform: translateY(-2px);
         }
 
-        /* প্রোডাক্ট গ্রিড */
+        /* Fluid Product Grid - 4 Columns */
         .products-fluid {
             width: 100%;
             padding: 0 15px;
@@ -440,20 +574,28 @@
         }
         
         @media (max-width: 1200px) {
-            .products-grid { grid-template-columns: repeat(3, 1fr); }
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
+        
         @media (max-width: 768px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
+        
         @media (max-width: 480px) {
-            .products-grid { grid-template-columns: 1fr; }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         .product-card {
             background: white;
-            border-radius: 24px;
+            border-radius: var(--radius-xl);
             padding: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
             border: 2px solid transparent;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -463,23 +605,29 @@
             flex-direction: column;
         }
         
+        body.dark-mode .product-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            border-color: #6366f1;
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
         
         .discount-badge {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: #ef4444;
+            background: var(--danger);
             color: white;
             padding: 4px 10px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-size: 0.75rem;
             font-weight: 700;
             z-index: 2;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .operator-badge {
@@ -487,65 +635,83 @@
             align-items: center;
             gap: 5px;
             padding: 5px 12px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-size: 0.75rem;
             font-weight: 700;
             margin-bottom: 12px;
             color: white;
             align-self: flex-start;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
-        .op-gp { background: #008a3c; }
-        .op-robi { background: #ed1c24; }
-        .op-airtel { background: #ff0000; }
-        .op-bl { background: #fbb03b; color: #1e293b; }
-        .op-tele { background: #009ca6; }
+        .op-gp { background: var(--gp); }
+        .op-robi { background: var(--robi); }
+        .op-airtel { background: var(--airtel); }
+        .op-bl { background: var(--bl); color: #1e293b; }
+        .op-tele { background: var(--tele); }
         
         .data-volume {
             font-size: 2.5rem;
             font-weight: 800;
             line-height: 1.1;
-            color: #1e293b;
+            color: var(--text-main);
             margin: 8px 0;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
+        
+        body.dark-mode .data-volume { color: #f1f5f9; }
         
         .data-unit {
             font-size: 1rem;
             font-weight: 500;
-            color: #64748b;
+            color: var(--text-light);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .pack-title {
             font-size: 1rem;
             font-weight: 600;
-            color: #64748b;
+            color: var(--text-light);
             margin-bottom: 15px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .pricing-section {
-            background: #f8fafc;
+            background: var(--light-bg);
             padding: 12px;
             border-radius: 16px;
             margin-bottom: 15px;
         }
         
+        body.dark-mode .pricing-section { background: #0f172a; }
+        
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        
         .regular-price {
             font-size: 1rem;
-            color: #64748b;
+            color: var(--text-light);
             text-decoration: line-through;
             font-weight: 500;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .offer-price {
             font-size: 1.8rem;
             font-weight: 800;
-            color: #10b981;
+            color: var(--success);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .savings-text {
             font-size: 0.8rem;
-            color: #10b981;
+            color: var(--success);
             font-weight: 600;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .validity-info {
@@ -558,11 +724,18 @@
         .validity-badge {
             background: white;
             padding: 6px 12px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-size: 0.8rem;
             font-weight: 600;
-            color: #1e293b;
-            border: 2px solid #e2e8f0;
+            color: var(--text-main);
+            border: 2px solid var(--border);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .validity-badge {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
         }
         
         .category-tag {
@@ -571,8 +744,9 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             padding: 4px 10px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             align-self: flex-start;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .cat-internet { background: #dbeafe; color: #2563eb; }
@@ -581,10 +755,10 @@
         
         .order-btn {
             width: 100%;
-            background: #1e293b;
+            background: var(--text-main);
             color: white;
             padding: 12px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-weight: 700;
             border: none;
             cursor: pointer;
@@ -595,26 +769,32 @@
             gap: 8px;
             font-size: 0.95rem;
             margin-top: auto;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        body.dark-mode .order-btn {
+            background: #f1f5f9;
+            color: #0f172a;
         }
         
         .order-btn:hover {
-            background: #6366f1;
+            background: var(--primary);
             transform: scale(1.02);
             box-shadow: 0 5px 15px rgba(99,102,241,0.4);
         }
 
-        /* মোর অফার বাটন */
+        /* More Offers Button */
         .more-offers-container {
             text-align: center;
             margin: 40px auto 60px;
         }
         
         .more-offers-btn {
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
             padding: 18px 50px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-weight: 800;
             font-size: 1.2rem;
             cursor: pointer;
@@ -623,216 +803,37 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .more-offers-btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 15px 30px rgba(99,102,241,0.4);
         }
+        
+        .more-offers-btn i {
+            transition: 0.3s;
+        }
+        
+        .more-offers-btn:hover i {
+            transform: translateX(5px);
+        }
 
-        /* অ্যাডমিন প্যানেল */
+        /* Admin Panel */
         .admin-section {
             background: white;
-            border-radius: 24px;
+            border-radius: var(--radius-xl);
             padding: 30px;
             margin: 40px auto;
             max-width: 1400px;
             width: 95%;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
             display: none;
         }
+        
+        body.dark-mode .admin-section { background: #1e293b; }
 
-        /* লোডিং স্পিনার */
-        .loading-spinner {
-            text-align: center;
-            padding: 50px;
-        }
-        
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border-left-color: #6366f1;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* গিটহাব সিঙ্ক সেকশন */
-        .github-sync-section {
-            background: linear-gradient(135deg, #f0f4ff 0%, #e6e9ff 100%);
-            border-radius: 24px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 2px solid #6366f1;
-        }
-        
-        .github-status {
-            padding: 10px;
-            border-radius: 12px;
-            background: white;
-            margin-bottom: 15px;
-        }
-        
-        .github-status.success { border-left: 4px solid #10b981; }
-        .github-status.error { border-left: 4px solid #ef4444; }
-        .github-status.warning { border-left: 4px solid #f59e0b; }
-
-        /* সার্ভিস টগল */
-        .service-toggle-container {
-            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-            border-radius: 9999px;
-            padding: 15px 25px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 80px;
-            height: 40px;
-        }
-        
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ef4444;
-            transition: .3s;
-            border-radius: 40px;
-        }
-        
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 32px;
-            width: 32px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .3s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .toggle-slider {
-            background-color: #10b981;
-        }
-        
-        input:checked + .toggle-slider:before {
-            transform: translateX(40px);
-        }
-        
-        .toggle-status {
-            font-weight: 600;
-            padding: 5px 15px;
-            border-radius: 9999px;
-            background: rgba(0,0,0,0.05);
-        }
-        
-        .toggle-status.on { color: #10b981; }
-        .toggle-status.off { color: #ef4444; }
-
-        /* সার্ভিস অফ মেসেজ */
-        .service-off-message {
-            text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            margin: 20px auto;
-            max-width: 600px;
-        }
-        
-        .service-off-message i {
-            font-size: 4rem;
-            color: #ef4444;
-            margin-bottom: 20px;
-            opacity: 0.7;
-        }
-
-        /* ফুটার */
-        .site-footer {
-            background: #1e293b;
-            color: white;
-            padding: 60px 20px 30px;
-            margin-top: auto;
-        }
-        
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-section h3 {
-            font-family: 'Poppins', 'SolaimanLipi', sans-serif;
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .footer-links a:hover {
-            color: #6366f1;
-            padding-left: 5px;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid #334155;
-            padding-top: 30px;
-            text-align: center;
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-        
-        .footer-bottom strong {
-            color: #6366f1;
-        }
-
-        /* পপআপ মোডাল */
+        /* Admin Login Modal */
         .admin-login-modal {
             position: fixed;
             top: 0;
@@ -857,6 +858,106 @@
             animation: popIn 0.3s ease;
         }
         
+        body.dark-mode .admin-login-content { background: #1e293b; }
+
+        /* Footer */
+        .site-footer {
+            background: var(--text-main);
+            color: white;
+            padding: 60px 20px 30px;
+            margin-top: auto;
+        }
+        
+        body.dark-mode .site-footer { background: #020617; }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-family: 'Poppins', 'SolaimanLipi', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-section p {
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+        
+        .footer-bottom strong {
+            color: var(--primary);
+        }
+
+        /* Popup Modal */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -881,42 +982,236 @@
             animation: popIn 0.3s ease;
         }
         
+        body.dark-mode .popup-content { background: #1e293b; }
+        
         @keyframes popIn {
             from { transform: scale(0.95); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* ফর্ম স্টাইল */
+        /* Enhanced Form Styles */
         .form-label {
             font-weight: 600;
             margin-bottom: 5px;
-            color: #1e293b;
+            color: var(--text-main);
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
+        body.dark-mode .form-label { color: #f1f5f9; }
         
         .form-control, .form-select {
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border);
             border-radius: 16px;
             padding: 12px 15px;
             transition: 0.3s;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
         }
         
         .form-control:focus, .form-select:focus {
-            border-color: #6366f1;
+            border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
         }
 
-        /* লাস্ট আপডেট ব্যাজ */
+        /* Condition Badge */
+        .condition-badge {
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            margin-left: 8px;
+            font-family: 'Inter', 'SolaimanLipi', sans-serif;
+        }
+
+        /* Last Update Badge for Admin Panel */
         .last-update-badge {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 4px 8px;
-            border-radius: 9999px;
+            border-radius: var(--radius-full);
             font-size: 0.7rem;
             font-weight: 600;
             white-space: nowrap;
         }
+        
+        .last-update-badge i {
+            margin-right: 4px;
+            font-size: 0.65rem;
+        }
 
-        /* রেস্পন্সিভ */
+        /* Service Toggle Switch */
+        .service-toggle-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            border-radius: var(--radius-full);
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        body.dark-mode .service-toggle-container {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3a4f 100%);
+        }
+        
+        .toggle-label {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+        
+        body.dark-mode .toggle-label { color: #f1f5f9; }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 40px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--danger);
+            transition: .3s;
+            border-radius: 40px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 32px;
+            width: 32px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--success);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(40px);
+        }
+        
+        .toggle-status {
+            font-weight: 600;
+            padding: 5px 15px;
+            border-radius: var(--radius-full);
+            background: rgba(0,0,0,0.05);
+        }
+        
+        .toggle-status.on {
+            color: var(--success);
+        }
+        
+        .toggle-status.off {
+            color: var(--danger);
+        }
+        
+        .service-off-message {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        
+        body.dark-mode .service-off-message {
+            background: #1e293b;
+        }
+        
+        .service-off-message i {
+            font-size: 4rem;
+            color: var(--danger);
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+        
+        .service-off-message h3 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        
+        .service-off-message p {
+            color: var(--text-light);
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border-left-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* GitHub Sync Section */
+        .github-sync-section {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6e9ff 100%);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px solid var(--primary);
+        }
+        
+        body.dark-mode .github-sync-section {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3748 100%);
+        }
+        
+        .github-status {
+            padding: 10px;
+            border-radius: var(--radius-lg);
+            background: white;
+            margin-bottom: 15px;
+        }
+        
+        body.dark-mode .github-status {
+            background: #0f172a;
+        }
+        
+        .github-status.success {
+            border-left: 4px solid var(--success);
+        }
+        
+        .github-status.error {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .github-status.warning {
+            border-left: 4px solid var(--warning);
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 968px) {
             .nav-menu { display: none; }
             .mobile-menu-btn { display: block; }
@@ -925,7 +1220,8 @@
     </style>
 </head>
 <body>
-    <!-- টপ নেভিগেশন -->
+
+    <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="nav-container">
             <div class="navbar-custom">
@@ -957,7 +1253,7 @@
         </div>
     </nav>
 
-    <!-- হিরো সেকশন -->
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
             <h1>🔥 সেরা ইন্টারনেট অফার</h1>
@@ -968,13 +1264,13 @@
         </div>
     </section>
 
-    <!-- মেইন কন্টেন্ট -->
+    <!-- Main Content -->
     <main class="container-fluid px-0">
         
-        <!-- ফিল্টার সেকশন -->
+        <!-- Advanced Filter Section -->
         <section class="filter-section" id="packs">
             
-            <!-- সার্চ ও সর্ট -->
+            <!-- Search & Sort -->
             <div class="filter-header">
                 <div class="search-wrapper">
                     <input type="text" class="search-input" id="searchInput" placeholder="প্যাক খুঁজুন (নাম্বার, অপারেটর, ডাটা...)">
@@ -1001,7 +1297,7 @@
                 </div>
             </div>
 
-            <!-- অপারেটর ফিল্টার -->
+            <!-- Operator Filter with Logos -->
             <div class="operator-filter-wrapper">
                 <div class="filter-group-label mb-3">
                     <i class="fas fa-signal"></i> অপারেটর নির্বাচন করুন
@@ -1034,7 +1330,7 @@
                 </div>
             </div>
 
-            <!-- ক্যাটাগরি ফিল্টার -->
+            <!-- Smart Category Filter -->
             <div class="category-filter-wrapper">
                 <div class="filter-group-label mb-3">
                     <i class="fas fa-tags"></i> প্যাকের ধরন নির্বাচন করুন
@@ -1063,10 +1359,10 @@
                 </div>
             </div>
 
-            <!-- একটিভ ফিল্টার -->
+            <!-- Active Filters -->
             <div class="active-filters-container" id="activeFilters"></div>
 
-            <!-- রেজাল্ট ইনফো -->
+            <!-- Results Info -->
             <div class="results-info">
                 <div class="results-count">
                     মোট <strong id="resultCount">0</strong>টি প্যাক পাওয়া গেছে (দেখানো হচ্ছে <span id="displayCount">0</span>টি)
@@ -1077,36 +1373,41 @@
             </div>
         </section>
 
-        <!-- লোডিং স্পিনার -->
+        <!-- Loading Spinner -->
         <div id="loadingSpinner" class="loading-spinner" style="display: none;">
             <div class="spinner"></div>
             <p class="text-muted">প্যাক লোড হচ্ছে...</p>
         </div>
 
-        <!-- সার্ভিস অফ মেসেজ -->
+        <!-- Service Status Indicator (shown when service is off) -->
         <div id="serviceOffMessage" style="display: none;">
             <div class="service-off-message">
                 <i class="fas fa-power-off"></i>
                 <h3>🔴 সার্ভিস বন্ধ আছে</h3>
                 <p class="mb-2">বর্তমানে আমাদের সার্ভিস সাময়িকভাবে বন্ধ রয়েছে।</p>
                 <p class="text-muted small">অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।</p>
+                <div class="mt-4">
+                    <span class="badge bg-warning text-dark px-4 py-2">
+                        <i class="fas fa-clock me-2"></i>শীঘ্রই আবার চালু হবে
+                    </span>
+                </div>
             </div>
         </div>
 
-        <!-- প্রোডাক্ট গ্রিড -->
+        <!-- Fluid Products Grid - 4 Columns -->
         <div class="products-fluid" id="productsContainer">
             <div class="products-grid" id="productContainer"></div>
         </div>
         
-        <!-- মোর অফার বাটন -->
+        <!-- More Offers Button -->
         <div class="more-offers-container" id="moreOffersContainer">
             <button class="more-offers-btn" id="moreOffersBtn" onclick="loadMoreProducts()">
-                <i class="fas fa-plus-circle"></i> আরও অফার দেখুন
+                <i class="fas fa-plus-circle"></i> আরও অফার দেখুন (১৫)
                 <i class="fas fa-arrow-right"></i>
             </button>
         </div>
 
-        <!-- অ্যাডমিন প্যানেল -->
+        <!-- Admin Panel (Hidden by default) -->
         <section class="admin-section" id="adminPanel">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4 class="fw-bold mb-0">
@@ -1122,7 +1423,7 @@
                 </div>
             </div>
 
-            <!-- সার্ভিস টগল -->
+            <!-- Service Toggle Switch -->
             <div class="service-toggle-container">
                 <div class="d-flex align-items-center gap-3">
                     <span class="toggle-label">
@@ -1139,42 +1440,49 @@
                 </div>
             </div>
 
-            <!-- গিটহাব গিস্ট সিঙ্ক সেকশন (টোকেন ছাড়া) -->
+            <!-- GitHub Gist Sync Section -->
             <div class="github-sync-section">
                 <h5 class="sync-title mb-3">
                     <i class="fab fa-github me-2"></i>
-                    গ্লোবাল ডাটা সিঙ্ক
+                    গ্লোবাল ডাটা সিঙ্ক (GitHub Gist)
                 </h5>
                 <p class="text-muted small mb-3">
                     ⚡ একবার আপডেট করুন, সব ব্রাউজারে সব কাস্টমার দেখতে পাবেন!
                 </p>
                 
-                <!-- গিটহাব কানেকশন স্ট্যাটাস -->
-                <div id="githubStatus" class="github-status mb-3">
+                <!-- GitHub Connection Status -->
+                <div id="githubStatus" class="github-status success mb-3">
                     <div class="d-flex align-items-center">
-                        <i class="fas fa-info-circle text-info me-2"></i>
-                        <span id="githubStatusText">Gist ID দিন এবং সংযোগ পরীক্ষা করুন</span>
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <span id="githubStatusText">GitHub Gist সংযুক্ত আছে</span>
                     </div>
                     <small class="text-muted d-block mt-1" id="lastSyncTime">সর্বশেষ সিঙ্ক: -</small>
                 </div>
                 
-                <!-- গিটহাব কনফিগারেশন ফর্ম (শুধু Gist ID) -->
+                <!-- GitHub Configuration Form -->
                 <div class="row g-3">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">GitHub Token</label>
+                        <input type="password" class="form-control" id="githubToken" 
+                               placeholder="ghp_xxxxxxxxxxxx" 
+                               value="">
+                        <small class="text-muted">আপনার টোকেন সংরক্ষিত আছে</small>
+                    </div>
+                    <div class="col-md-6">
                         <label class="form-label small fw-bold">Gist ID</label>
                         <input type="text" class="form-control" id="gistId" 
-                               placeholder="আপনার gist id দিন">
+                               placeholder="আপনার gist id">
                         <small class="text-muted">https://gist.github.com/username/your_gist_id</small>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label small fw-bold">ফাইল নাম</label>
+                    <div class="col-12">
+                        <label class="form-label small fw-bold">Gist নাম</label>
                         <input type="text" class="form-control" id="gistFilename" 
-                               value="rechargex_products.json">
+                               value="rechargex_products.json" placeholder="filename.json">
                     </div>
                     <div class="col-12">
                         <div class="d-flex gap-2">
-                            <button class="btn btn-primary rounded-pill flex-grow-1" onclick="connectToGist()">
-                                <i class="fas fa-link me-2"></i>কানেক্ট
+                            <button class="btn btn-primary rounded-pill flex-grow-1" onclick="testGistConnection()">
+                                <i class="fas fa-plug me-2"></i>কানেকশন টেস্ট
                             </button>
                             <button class="btn btn-success rounded-pill flex-grow-1" onclick="pushToGist()">
                                 <i class="fas fa-cloud-upload-alt me-2"></i>গিটহাবে আপলোড
@@ -1185,9 +1493,13 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="alert alert-info mt-3 mb-0 small">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>গুরুত্বপূর্ণ:</strong> প্রথমবার ব্যবহারের আগে উপরের ফর্মে আপনার Gist ID দিন এবং "কানেকশন টেস্ট" বাটনে ক্লিক করুন।
+                </div>
             </div>
 
-            <!-- প্রোডাক্ট টেবিল -->
             <div class="table-responsive">
                 <table class="table align-middle">
                     <thead class="table-light">
@@ -1208,16 +1520,20 @@
                     <tbody id="adminTable"></tbody>
                 </table>
             </div>
+            <div class="text-muted small mt-3">
+                <i class="fas fa-info-circle me-1"></i> 
+                সর্বশেষ মূল্য আপডেটের তারিখ দেখায় কবে প্যাকের দাম শেষ পরিবর্তন করা হয়েছে।
+            </div>
         </section>
     </main>
 
-    <!-- ফুটার -->
+    <!-- Footer with Admin Login Toggle -->
     <footer class="site-footer" id="contact">
         <div class="footer-container">
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3><i class="fas fa-bolt me-2"></i>RechargeX Pro</h3>
-                    <p>বাংলাদেশের সবচেয়ে নির্ভরযোগ্য এবং সাশ্রয়ী মোবাইল রিচার্জ প্ল্যাটফর্ম।</p>
+                    <p>বাংলাদেশের সবচেয়ে নির্ভরযোগ্য এবং সাশ্রয়ী মোবাইল রিচার্জ প্ল্যাটফর্ম। সব অপারেটরের সেরা অফার এক জায়গায়।</p>
                     <div class="social-links">
                         <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
@@ -1255,18 +1571,19 @@
                         <li><a href="mailto:support@rechargex.pro"><i class="fas fa-envelope"></i> support@rechargex.pro</a></li>
                         <li><a href="#"><i class="fas fa-map-marker-alt"></i> ঢাকা, বাংলাদেশ</a></li>
                         <li><a href="https://wa.me/8801927671975"><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপে যোগাযোগ</a></li>
+                        <!-- Admin Login/Logout Toggle Button -->
                         <li><a href="#" onclick="openAdminLoginModal()" id="footerAdminBtn"><i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 <strong>RechargeX Pro</strong> | সর্বস্বত্ব সংরক্ষিত</p>
+                <p>&copy; 2024 <strong>RechargeX Pro</strong> | সর্বস্বত্ব সংরক্ষিত | Designed with <i class="fas fa-heart text-danger"></i> in Bangladesh</p>
             </div>
         </div>
     </footer>
 
-    <!-- অ্যাডমিন লগইন মোডাল -->
+    <!-- Admin Login Modal (Password Protected) -->
     <div class="admin-login-modal" id="adminLoginModal">
         <div class="admin-login-content">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -1288,10 +1605,11 @@
                     <i class="fas fa-sign-in-alt me-2"></i>লগইন করুন
                 </button>
             </form>
+           
         </div>
     </div>
 
-    <!-- প্রোডাক্ট পপআপ -->
+    <!-- Add/Edit Product Popup -->
     <div class="popup-overlay" id="productPopup">
         <div class="popup-content">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -1347,9 +1665,9 @@
                     <input type="number" class="form-control" id="popupOfferPrice" placeholder="598" required>
                 </div>
                 
-                <!-- কন্ডিশন ড্রপডাউন -->
+                <!-- Condition Dropdown -->
                 <div class="col-12">
-                    <label class="form-label small fw-bold">কন্ডিশন</label>
+                    <label class="form-label small fw-bold">কন্ডিশন <span class="condition-badge">নতুন</span></label>
                     <select class="form-select" id="popupCondition" required>
                         <option value="all_bd">🇧🇩 অল বাংলাদেশ (All BD)</option>
                         <option value="check_number">📞 চেক নাম্বার (Check Number)</option>
@@ -1357,6 +1675,7 @@
                         <option value="corporate">🏢 কর্পোরেট</option>
                         <option value="student">🎓 স্টুডেন্ট</option>
                     </select>
+                    <small class="text-muted">প্যাকটি কোন শর্তে প্রযোজ্য তা নির্বাচন করুন</small>
                 </div>
                 
                 <div class="col-12 mt-4">
@@ -1368,7 +1687,7 @@
         </div>
     </div>
 
-    <!-- চেকআউট মোডাল -->
+    <!-- Checkout Modal -->
     <div class="modal fade" id="checkoutModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="border-radius: 24px;">
@@ -1402,7 +1721,7 @@
                     </div>
                     
                     <input type="text" class="form-control mb-2" placeholder="যে নাম্বারে অফার নিতে চান লিখুন" id="userPhone">
-                    <input type="text" class="form-control mb-2" placeholder="লাস্ট ৪ ডিজিট লিখুন" id="trxId">
+                    <input type="text" class="form-control mb-2" placeholder="লাস্ট ৪ ডিজিট লিখুন (টাকা পাঠিয়েছেন)" id="trxId">
                     <select class="form-select mb-3" id="paymentMethod">
                         <option value="bKash">bKash</option>
                         <option value="Nagad">Nagad</option>
@@ -1421,87 +1740,123 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // ========== ডাটা ==========
+        // ========== DATA ==========
         let products = [];
-        let serviceEnabled = true;
-        let isAdminLoggedIn = false;
-        let selectedPack = null;
-        let editingId = null;
-        let modalInstance;
         
-        // গিটহাব গিস্ট কনফিগারেশন (শুধু Gist ID)
+        // Service state (true = ON, false = OFF)
+        let serviceEnabled = true;
+        
+        // GitHub Gist Configuration
         let githubConfig = {
+            token: '',
             gistId: '',
             filename: 'rechargex_products.json'
         };
         
-        // ========== গিটহাব ফাংশন (পাবলিক গিস্ট) ==========
+        // ========== GITHUB GIST FUNCTIONS ==========
         
         function loadGithubConfig() {
             const savedConfig = localStorage.getItem('rechargex_github_config');
             if (savedConfig) {
                 githubConfig = JSON.parse(savedConfig);
+                document.getElementById('githubToken').value = githubConfig.token || '';
                 document.getElementById('gistId').value = githubConfig.gistId || '';
                 document.getElementById('gistFilename').value = githubConfig.filename || 'rechargex_products.json';
+            } else {
+                document.getElementById('githubToken').value = githubConfig.token;
             }
         }
 
         function saveGithubConfig() {
             githubConfig = {
+                token: document.getElementById('githubToken').value.trim(),
                 gistId: document.getElementById('gistId').value.trim(),
                 filename: document.getElementById('gistFilename').value.trim() || 'rechargex_products.json'
             };
             localStorage.setItem('rechargex_github_config', JSON.stringify(githubConfig));
         }
 
-        function connectToGist() {
+        async function testGistConnection() {
             saveGithubConfig();
             
-            if (!githubConfig.gistId) {
-                updateGithubStatus('error', 'Gist ID দিন!');
+            if (!githubConfig.token || !githubConfig.gistId) {
+                updateGithubStatus('error', 'টোকেন এবং গিস্ট আইডি দিন!');
                 return;
             }
             
-            updateGithubStatus('warning', 'সংযোগ পরীক্ষা হচ্ছে...');
+            updateGithubStatus('warning', 'কানেকশন টেস্ট হচ্ছে...');
             
-            fetch(`https://api.github.com/gists/${githubConfig.gistId}`)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
+            try {
+                const response = await fetch(`https://api.github.com/gists/${githubConfig.gistId}`, {
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
                     }
-                    throw new Error('Gist পাওয়া যায়নি');
-                })
-                .then(data => {
-                    updateGithubStatus('success', '✅ সংযোগ সফল!');
-                    document.getElementById('lastSyncTime').innerText = `সর্বশেষ আপডেট: ${new Date(data.updated_at).toLocaleString('bn-BD')}`;
-                })
-                .catch(error => {
-                    updateGithubStatus('error', '❌ Gist ID সঠিক নয়!');
                 });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    updateGithubStatus('success', '✅ GitHub Gist সংযুক্ত আছে!');
+                    document.getElementById('lastSyncTime').innerText = `সর্বশেষ আপডেট: ${new Date(data.updated_at).toLocaleString('bn-BD')}`;
+                } else {
+                    updateGithubStatus('error', '❌ সংযোগ ব্যর্থ! টোকেন/গিস্ট আইডি চেক করুন।');
+                }
+            } catch (error) {
+                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা!');
+            }
         }
 
         async function pushToGist() {
             saveGithubConfig();
             
-            if (!githubConfig.gistId) {
-                updateGithubStatus('error', 'প্রথমে Gist ID দিন এবং কানেক্ট করুন!');
+            if (!githubConfig.token || !githubConfig.gistId) {
+                updateGithubStatus('error', 'টোকেন এবং গিস্ট আইডি দিন!');
                 return;
             }
             
             updateGithubStatus('warning', 'গিটহাবে আপলোড হচ্ছে...');
             
-            // টোকেন ছাড়া পাবলিক গিস্ট আপডেট করা যায় না
-            alert('⚠️ পাবলিক গিস্ট আপডেট করতে টোকেন প্রয়োজন। অনুগ্রহ করে অ্যাডমিন প্যানেলে টোকেন দিন।');
+            const data = {
+                products: products,
+                serviceEnabled: serviceEnabled,
+                lastUpdated: new Date().toISOString()
+            };
             
-            // এই ফাংশন শুধু UI দেখানোর জন্য
-            updateGithubStatus('info', 'টোকেন ছাড়া আপলোড সম্ভব নয়।');
+            const files = {};
+            files[githubConfig.filename] = {
+                content: JSON.stringify(data, null, 2)
+            };
+            
+            try {
+                const response = await fetch(`https://api.github.com/gists/${githubConfig.gistId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ files: files })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    updateGithubStatus('success', '✅ গিটহাবে আপলোড সফল!');
+                    document.getElementById('lastSyncTime').innerText = `সর্বশেষ সিঙ্ক: ${new Date().toLocaleString('bn-BD')}`;
+                    
+                    alert('✅ ডাটা সফলভাবে GitHub Gist-এ আপলোড হয়েছে! এখন সব কাস্টমার আপডেটেড প্যাক দেখতে পাবেন।');
+                } else {
+                    updateGithubStatus('error', '❌ আপলোড ব্যর্থ!');
+                }
+            } catch (error) {
+                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা!');
+            }
         }
 
         async function pullFromGist() {
             saveGithubConfig();
             
             if (!githubConfig.gistId) {
-                updateGithubStatus('error', 'Gist ID দিন!');
+                updateGithubStatus('error', 'গিস্ট আইডি দিন!');
                 return;
             }
             
@@ -1535,6 +1890,8 @@
                         
                         updateGithubStatus('success', '✅ গিটহাব থেকে লোড সফল!');
                         document.getElementById('lastSyncTime').innerText = `সর্বশেষ সিঙ্ক: ${new Date().toLocaleString('bn-BD')}`;
+                        
+                        alert('✅ গিটহাব থেকে ডাটা লোড করা হয়েছে!');
                     } else {
                         updateGithubStatus('error', `❌ ফাইল "${filename}" পাওয়া যায়নি!`);
                     }
@@ -1548,6 +1905,8 @@
 
         function updateGithubStatus(type, message) {
             const statusDiv = document.getElementById('githubStatus');
+            const statusText = document.getElementById('githubStatusText');
+            
             statusDiv.className = `github-status ${type}`;
             
             let icon = 'info-circle';
@@ -1564,7 +1923,7 @@
             `;
         }
 
-        // ========== প্রোডাক্ট ফাংশন ==========
+        // ========== LOAD PRODUCTS (WITH GITHUB PRIORITY) ==========
         
         async function loadProducts() {
             showLoading(true);
@@ -1573,6 +1932,7 @@
             const savedConfig = localStorage.getItem('rechargex_github_config');
             if (savedConfig) {
                 githubConfig = JSON.parse(savedConfig);
+                document.getElementById('githubToken').value = githubConfig.token || '';
                 document.getElementById('gistId').value = githubConfig.gistId || '';
                 document.getElementById('gistFilename').value = githubConfig.filename || 'rechargex_products.json';
                 
@@ -1588,6 +1948,8 @@
                                     products = content.products;
                                     if (content.serviceEnabled !== undefined) {
                                         serviceEnabled = content.serviceEnabled;
+                                        const toggle = document.getElementById('serviceToggle');
+                                        if (toggle) toggle.checked = serviceEnabled;
                                     }
                                     saveProducts();
                                     saveServiceState();
@@ -1615,6 +1977,19 @@
             showLoading(false);
         }
 
+        function showLoading(show) {
+            const spinner = document.getElementById('loadingSpinner');
+            const productsContainer = document.getElementById('productsContainer');
+            if (show) {
+                spinner.style.display = 'block';
+                productsContainer.style.display = 'none';
+            } else {
+                spinner.style.display = 'none';
+                productsContainer.style.display = 'block';
+            }
+        }
+
+        // Load products from localStorage or generate sample data
         function generateSampleProducts() {
             const conditions = ['all_bd', 'check_number', 'special', 'corporate', 'student'];
             
@@ -1639,6 +2014,7 @@
                 const validity = validities[Math.floor(Math.random() * validities.length)];
                 const condition = conditions[Math.floor(Math.random() * conditions.length)];
                 
+                // Random price update date (between 1-30 days ago)
                 const daysAgo = Math.floor(Math.random() * 30) + 1;
                 const priceUpdateDate = Date.now() - (daysAgo * 24 * 60 * 60 * 1000);
                 
@@ -1659,32 +2035,52 @@
             saveProducts();
         }
 
+        // Save products to localStorage
         function saveProducts() {
             localStorage.setItem('rechargex_products', JSON.stringify(products));
         }
 
+        // Load service state from localStorage
         function loadServiceState() {
             const savedServiceState = localStorage.getItem('rechargex_service_enabled');
             if (savedServiceState !== null) {
                 serviceEnabled = savedServiceState === 'true';
             }
+            
+            // Update toggle checkbox
             const toggle = document.getElementById('serviceToggle');
-            if (toggle) toggle.checked = serviceEnabled;
+            if (toggle) {
+                toggle.checked = serviceEnabled;
+            }
+            
+            // Update badge
             updateServiceStatusUI();
         }
 
+        // Save service state to localStorage
         function saveServiceState() {
             localStorage.setItem('rechargex_service_enabled', serviceEnabled);
         }
 
+        // Toggle service on/off
         function toggleService() {
             const toggle = document.getElementById('serviceToggle');
             serviceEnabled = toggle.checked;
+            
+            // Save to localStorage
             saveServiceState();
+            
+            // Update UI
             updateServiceStatusUI();
+            
+            // Re-render products or show service off message
             updateDisplayBasedOnService();
+            
+            // Show confirmation
+            alert(serviceEnabled ? "✅ সার্ভিস চালু করা হয়েছে" : "🔴 সার্ভিস বন্ধ করা হয়েছে");
         }
 
+        // Update service status UI elements
         function updateServiceStatusUI() {
             const badge = document.getElementById('serviceStatusBadge');
             if (badge) {
@@ -1693,6 +2089,7 @@
             }
         }
 
+        // Update display based on service state
         function updateDisplayBasedOnService() {
             const productsContainer = document.getElementById('productsContainer');
             const serviceOffMessage = document.getElementById('serviceOffMessage');
@@ -1700,37 +2097,27 @@
             const moreOffersContainer = document.getElementById('moreOffersContainer');
             
             if (!serviceEnabled) {
+                // Hide products and filters, show service off message
                 if (productsContainer) productsContainer.style.display = 'none';
                 if (moreOffersContainer) moreOffersContainer.style.display = 'none';
-                if (filterSection) {
-                    filterSection.style.opacity = '0.5';
-                    filterSection.style.pointerEvents = 'none';
-                }
+                if (filterSection) filterSection.style.opacity = '0.5';
+                if (filterSection) filterSection.style.pointerEvents = 'none';
                 if (serviceOffMessage) serviceOffMessage.style.display = 'block';
             } else {
+                // Show products and filters, hide service off message
                 if (productsContainer) productsContainer.style.display = 'block';
                 if (filterSection) {
                     filterSection.style.opacity = '1';
                     filterSection.style.pointerEvents = 'all';
                 }
                 if (serviceOffMessage) serviceOffMessage.style.display = 'none';
+                
+                // Re-render products
                 renderProducts(true);
             }
         }
 
-        function showLoading(show) {
-            const spinner = document.getElementById('loadingSpinner');
-            const productsContainer = document.getElementById('productsContainer');
-            if (show) {
-                spinner.style.display = 'block';
-                productsContainer.style.display = 'none';
-            } else {
-                spinner.style.display = 'none';
-                productsContainer.style.display = 'block';
-            }
-        }
-
-        // ========== ফিল্টার ভেরিয়েবল ==========
+        // State
         let filters = { 
             op: 'all', 
             cat: 'all', 
@@ -1740,10 +2127,16 @@
             validity: 'all'
         };
         
+        let isAdminLoggedIn = false;
+        let selectedPack = null;
+        let editingId = null;
+        let modalInstance;
+
+        // Pagination
         let displayedProducts = 16;
         const productsPerPage = 16;
 
-        // ========== হেল্পার ফাংশন ==========
+        // ========== HELPER FUNCTIONS ==========
         function calculateDiscount(regular, offer) {
             return Math.round(((regular - offer) / regular) * 100);
         }
@@ -1767,15 +2160,18 @@
         function toggleVolumeField() {
             const cat = document.getElementById('popupCategory').value;
             const volumeLabel = document.getElementById('volumeLabel');
+            const volumeInput = document.getElementById('popupData');
+            
             if(cat === 'minute') {
                 volumeLabel.innerText = 'মিনিট ভলিউম';
-                document.getElementById('popupData').placeholder = '100 Min';
+                volumeInput.placeholder = '100 Min';
             } else {
                 volumeLabel.innerText = 'ডাটা ভলিউম';
-                document.getElementById('popupData').placeholder = '30 GB';
+                volumeInput.placeholder = '30 GB';
             }
         }
 
+        // Format date for display
         function formatDate(timestamp) {
             if (!timestamp) return 'N/A';
             const date = new Date(timestamp);
@@ -1783,6 +2179,7 @@
             const diffTime = Math.abs(now - date);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             
+            // If less than 24 hours, show hours
             if (diffDays === 0) {
                 const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
                 if (diffHours === 0) {
@@ -1791,17 +2188,22 @@
                 }
                 return `${diffHours} ঘন্টা আগে`;
             }
+            
+            // If less than 7 days, show days
             if (diffDays < 7) {
                 return `${diffDays} দিন আগে`;
             }
+            
+            // Otherwise show full date
             const day = date.getDate().toString().padStart(2, '0');
             const month = (date.getMonth() + 1).toString().padStart(2, '0');
             const year = date.getFullYear();
             return `${day}/${month}/${year}`;
         }
 
-        // ========== রেন্ডার প্রোডাক্টস ==========
+        // ========== RENDER PRODUCTS ==========
         function renderProducts(resetPagination = true) {
+            // If service is off, don't render products
             if (!serviceEnabled) {
                 updateDisplayBasedOnService();
                 return;
@@ -1833,6 +2235,7 @@
                 return opMatch && catMatch && priceMatch && validityMatch && searchMatch;
             });
 
+            // Apply sorting
             if(filters.sort === 'price-low') filtered.sort((a,b) => a.offerPrice - b.offerPrice);
             else if(filters.sort === 'price-high') filtered.sort((a,b) => b.offerPrice - a.offerPrice);
             else if(filters.sort === 'discount') filtered.sort((a,b) => calculateDiscount(b.regularPrice, b.offerPrice) - calculateDiscount(a.regularPrice, a.offerPrice));
@@ -1844,8 +2247,13 @@
             document.getElementById('resultCount').innerText = totalCount;
             document.getElementById('displayCount').innerText = Math.min(displayedProducts, totalCount);
 
+            // Show/hide more offers button
             const moreBtnContainer = document.getElementById('moreOffersContainer');
-            moreBtnContainer.style.display = displayedProducts >= totalCount ? 'none' : 'block';
+            if(displayedProducts >= totalCount) {
+                moreBtnContainer.style.display = 'none';
+            } else {
+                moreBtnContainer.style.display = 'block';
+            }
 
             if(productsToShow.length === 0) {
                 container.innerHTML = `
@@ -1905,13 +2313,14 @@
             updateActiveFilters();
         }
 
+        // Load more products
         function loadMoreProducts() {
             if (!serviceEnabled) return;
             displayedProducts += productsPerPage;
             renderProducts(false);
         }
 
-        // ========== ফিল্টার ফাংশন ==========
+        // ========== FILTER FUNCTIONS ==========
         function applyOperator(op, element) {
             if (!serviceEnabled) return;
             document.querySelectorAll('.operator-item').forEach(el => el.classList.remove('active'));
@@ -1999,6 +2408,10 @@
             }
             if(type === 'price') {
                 filters.maxPrice = 3000;
+                document.querySelectorAll('.price-btn').forEach(b => {
+                    if(b.dataset.price === 'all') b.classList.add('active');
+                    else b.classList.remove('active');
+                });
             }
             if(type === 'validity') {
                 filters.validity = 'all';
@@ -2027,10 +2440,15 @@
                 else el.classList.remove('active');
             });
             
+            document.querySelectorAll('.price-btn').forEach(b => {
+                if(b.dataset.price === 'all') b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            
             renderProducts();
         }
 
-        // সার্চ
+        // Search with debounce
         let searchTimeout;
         document.getElementById('searchInput')?.addEventListener('input', (e) => {
             if (!serviceEnabled) return;
@@ -2041,12 +2459,13 @@
             }, 300);
         });
 
-        // ========== চেকআউট ফাংশন ==========
+        // ========== CHECKOUT & WHATSAPP ==========
         function openCheckout(id) {
             if (!serviceEnabled) {
                 alert("🔴 সার্ভিস বর্তমানে বন্ধ আছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।");
                 return;
             }
+            
             selectedPack = products.find(p => p.id === id);
             if(!selectedPack) return;
             
@@ -2073,7 +2492,11 @@
             
             const phone = document.getElementById('userPhone').value || "N/A";
             const trx = document.getElementById('trxId').value || "Pending";
+            const method = document.getElementById('paymentMethod').value;
+            const savings = selectedPack.regularPrice - selectedPack.offerPrice;
+            const conditionText = getConditionText(selectedPack.condition);
             
+            // Smart formatted message with emojis
             const message = `🛒 *নতুন অর্ডার*\n\n` +
                 `👤 *অফার নাম্বার:* ${phone}\n` +
                 `📦 *প্যাক:* ${selectedPack.dataVolume} ${selectedPack.packName}\n` +
@@ -2083,78 +2506,17 @@
                 `🧾 *লাস্ট নাম্বার:* ${trx}\n\n` +
                 `✅ অনুগ্রহ করে আমার অর্ডার কনফার্ম করুন! 🙏`;
             
+            // Encode for URL
             const encodedMessage = encodeURIComponent(message);
+            
+            // Open WhatsApp
             window.open(`https://wa.me/8801927671975?text=${encodedMessage}`, '_blank');
             
+            // Close modal
             bootstrap.Modal.getInstance(document.getElementById('checkoutModal')).hide();
         }
 
-        // ========== অ্যাডমিন ফাংশন ==========
-        function checkAdminLogin() {
-            const savedLogin = localStorage.getItem('rechargex_admin_loggedin');
-            if (savedLogin === 'true') {
-                isAdminLoggedIn = true;
-                
-                const footerBtn = document.getElementById('footerAdminBtn');
-                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
-                footerBtn.style.color = '#ef4444';
-                
-                document.getElementById('adminPanel').style.display = 'block';
-                renderAdminTable();
-                loadServiceState();
-                loadGithubConfig();
-            }
-        }
-
-        function openAdminLoginModal() {
-            if(isAdminLoggedIn) {
-                logoutAdmin();
-            } else {
-                document.getElementById('adminLoginModal').style.display = 'flex';
-            }
-        }
-
-        function closeAdminLoginModal() {
-            document.getElementById('adminLoginModal').style.display = 'none';
-        }
-
-        function adminLoginWithPassword(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('adminUsername').value;
-            const password = document.getElementById('adminPassword').value;
-            
-            if(username === 'admin' && password === '@Rk9748') {
-                isAdminLoggedIn = true;
-                localStorage.setItem('rechargex_admin_loggedin', 'true');
-                closeAdminLoginModal();
-                
-                const footerBtn = document.getElementById('footerAdminBtn');
-                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
-                footerBtn.style.color = '#ef4444';
-                
-                document.getElementById('adminPanel').style.display = 'block';
-                renderAdminTable();
-                loadServiceState();
-                loadGithubConfig();
-                
-                alert("✅ অ্যাডমিন লগইন সফল!");
-            } else {
-                alert("❌ ভুল ইউজারনেম অথবা পাসওয়ার্ড!");
-            }
-        }
-
-        function logoutAdmin() {
-            isAdminLoggedIn = false;
-            localStorage.removeItem('rechargex_admin_loggedin');
-            
-            const footerBtn = document.getElementById('footerAdminBtn');
-            footerBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন';
-            footerBtn.style.color = '#94a3b8';
-            
-            document.getElementById('adminPanel').style.display = 'none';
-        }
-
+        // ========== ADMIN FUNCTIONS ==========
         function openAddPopup() {
             if(!isAdminLoggedIn) { 
                 alert("⚠️ অনুগ্রহ করে প্রথমে অ্যাডমিন লগইন করুন!"); 
@@ -2198,14 +2560,17 @@
         function saveProduct(e) {
             e.preventDefault();
             
+            // Check if price has changed
             let priceUpdateDate = Date.now();
             
             if (editingId !== null) {
                 const existingProduct = products.find(p => p.id === editingId);
-                if (existingProduct && 
-                    existingProduct.regularPrice === parseInt(document.getElementById('popupRegularPrice').value) &&
-                    existingProduct.offerPrice === parseInt(document.getElementById('popupOfferPrice').value)) {
-                    priceUpdateDate = existingProduct.priceUpdateDate;
+                if (existingProduct) {
+                    // If price hasn't changed, keep the old update date
+                    if (existingProduct.regularPrice === parseInt(document.getElementById('popupRegularPrice').value) &&
+                        existingProduct.offerPrice === parseInt(document.getElementById('popupOfferPrice').value)) {
+                        priceUpdateDate = existingProduct.priceUpdateDate;
+                    }
                 }
             }
             
@@ -2219,18 +2584,20 @@
                 offerPrice: parseInt(document.getElementById('popupOfferPrice').value),
                 condition: document.getElementById('popupCondition').value,
                 priceUpdateDate: priceUpdateDate,
-                date: Date.now(),
-                id: editingId || Date.now()
+                date: Date.now()
             };
 
             if(editingId === null) {
+                newData.id = Date.now();
                 products.unshift(newData);
             } else {
                 const idx = products.findIndex(p => p.id === editingId);
-                if(idx !== -1) products[idx] = newData;
+                if(idx !== -1) products[idx] = { ...products[idx], ...newData, id: editingId };
             }
             
+            // Save to localStorage
             saveProducts();
+            
             renderProducts();
             renderAdminTable();
             closePopup();
@@ -2241,7 +2608,10 @@
             if(!isAdminLoggedIn) return;
             if(confirm("এই প্যাকটি ডিলিট করতে চান?")) {
                 products = products.filter(p => p.id !== id);
+                
+                // Save to localStorage
                 saveProducts();
+                
                 renderProducts();
                 renderAdminTable();
             }
@@ -2253,6 +2623,8 @@
                 const discount = calculateDiscount(p.regularPrice, p.offerPrice);
                 const conditionText = getConditionText(p.condition);
                 const updateDate = formatDate(p.priceUpdateDate);
+                
+                // Determine if price was updated recently (within last 7 days)
                 const isRecent = p.priceUpdateDate && (Date.now() - p.priceUpdateDate) < 7 * 24 * 60 * 60 * 1000;
                 
                 html += `<tr>
@@ -2283,6 +2655,97 @@
             document.getElementById('adminTable').innerHTML = html;
         }
 
+        // ========== ADMIN LOGIN FUNCTIONS ==========
+        function checkAdminLogin() {
+            const savedLogin = localStorage.getItem('rechargex_admin_loggedin');
+            if (savedLogin === 'true') {
+                isAdminLoggedIn = true;
+                
+                // Update footer button
+                const footerBtn = document.getElementById('footerAdminBtn');
+                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
+                footerBtn.style.color = '#ef4444';
+                
+                // Show admin panel
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminTable();
+                
+                // Load service state and update toggle
+                loadServiceState();
+                
+                // Load GitHub config
+                loadGithubConfig();
+            }
+        }
+
+        function openAdminLoginModal() {
+            if(isAdminLoggedIn) {
+                // If already logged in, logout instead
+                logoutAdmin();
+            } else {
+                // Show login modal
+                document.getElementById('adminLoginModal').style.display = 'flex';
+            }
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('adminLoginModal').style.display = 'none';
+        }
+
+        function adminLoginWithPassword(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Check credentials
+            if(username === 'admin' && password === '@Rk9748') {
+                isAdminLoggedIn = true;
+                
+                // Save login state to localStorage
+                localStorage.setItem('rechargex_admin_loggedin', 'true');
+                
+                closeAdminLoginModal();
+                
+                // Update footer button
+                const footerBtn = document.getElementById('footerAdminBtn');
+                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
+                footerBtn.style.color = '#ef4444';
+                
+                // Show admin panel
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminTable();
+                
+                // Load service state
+                loadServiceState();
+                
+                // Load GitHub config
+                loadGithubConfig();
+                
+                alert("✅ অ্যাডমিন লগইন সফল!");
+            } else {
+                alert("❌ ভুল ইউজারনেম অথবা পাসওয়ার্ড!");
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            
+            // Remove login state from localStorage
+            localStorage.removeItem('rechargex_admin_loggedin');
+            
+            // Update footer button
+            const footerBtn = document.getElementById('footerAdminBtn');
+            footerBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন';
+            footerBtn.style.color = '#94a3b8';
+            
+            // Hide admin panel
+            document.getElementById('adminPanel').style.display = 'none';
+            
+            alert("👋 অ্যাডমিন লগআউট করা হয়েছে");
+        }
+
+        // ========== UI FUNCTIONS ==========
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             const icon = document.querySelector('.fa-moon');
@@ -2297,7 +2760,7 @@
             navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // ক্লোজ পপআপ আউটসাইড ক্লিক
+        // Close popup when clicking outside
         document.getElementById('productPopup')?.addEventListener('click', (e) => {
             if(e.target.id === 'productPopup') closePopup();
         });
@@ -2306,10 +2769,11 @@
             if(e.target.id === 'adminLoginModal') closeAdminLoginModal();
         });
 
-        // ইনিশিয়ালাইজেশন
+        // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', async () => {
             showLoading(true);
-            await loadProducts();
+            
+            await loadProducts(); // This will try GitHub first, then localStorage
             loadServiceState();
             checkAdminLogin();
             updateDisplayBasedOnService();
@@ -2319,6 +2783,7 @@
             }
             
             modalInstance = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            
             showLoading(false);
         });
     </script>
