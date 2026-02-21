@@ -1440,7 +1440,7 @@
                 </div>
             </div>
 
-            <!-- GitHub Gist Sync Section -->
+            <!-- GitHub Gist Sync Section (প্রি-কনফিগারড) -->
             <div class="github-sync-section">
                 <h5 class="sync-title mb-3">
                     <i class="fab fa-github me-2"></i>
@@ -1459,25 +1459,22 @@
                     <small class="text-muted d-block mt-1" id="lastSyncTime">সর্বশেষ সিঙ্ক: -</small>
                 </div>
                 
-                <!-- GitHub Configuration Form -->
+                <!-- GitHub Configuration Form (প্রি-ফিল করা) -->
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label small fw-bold">GitHub Token</label>
                         <input type="password" class="form-control" id="githubToken" 
-                               placeholder="ghp_xxxxxxxxxxxx" 
                                value="">
-                        <small class="text-muted">আপনার টোকেন সংরক্ষিত আছে</small>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label small fw-bold">Gist ID</label>
                         <input type="text" class="form-control" id="gistId" 
-                               placeholder="আপনার gist id">
-                        <small class="text-muted">https://gist.github.com/username/your_gist_id</small>
+                               value="e60427c5aaced5d36245ff0b73fc44bb">
                     </div>
                     <div class="col-12">
                         <label class="form-label small fw-bold">Gist নাম</label>
                         <input type="text" class="form-control" id="gistFilename" 
-                               value="rechargex_products.json" placeholder="filename.json">
+                               value="rechargex_products.json">
                     </div>
                     <div class="col-12">
                         <div class="d-flex gap-2">
@@ -1492,11 +1489,6 @@
                             </button>
                         </div>
                     </div>
-                </div>
-                
-                <div class="alert alert-info mt-3 mb-0 small">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <strong>গুরুত্বপূর্ণ:</strong> প্রথমবার ব্যবহারের আগে উপরের ফর্মে আপনার Gist ID দিন এবং "কানেকশন টেস্ট" বাটনে ক্লিক করুন।
                 </div>
             </div>
 
@@ -1743,35 +1735,155 @@
         // ========== DATA ==========
         let products = [];
         
-        // Service state (true = ON, false = OFF)
+        // Service state (true = ON, false = OFF) - localStorage থেকে লোড হবে
         let serviceEnabled = true;
         
         // GitHub Gist Configuration
         let githubConfig = {
             token: '',
-            gistId: '',
+            gistId: 'e60427c5aaced5d36245ff0b73fc44bb',
             filename: 'rechargex_products.json'
         };
         
+        // ========== SERVICE STATE MANAGEMENT (ফিক্সড) ==========
+        
+        // Service state load করুন localStorage থেকে
+        function loadServiceState() {
+            const savedServiceState = localStorage.getItem('rechargex_service_enabled');
+            console.log('Loading service state from localStorage:', savedServiceState);
+            
+            if (savedServiceState !== null) {
+                serviceEnabled = savedServiceState === 'true';
+            } else {
+                // প্রথমবার use করলে default true
+                serviceEnabled = true;
+                localStorage.setItem('rechargex_service_enabled', 'true');
+            }
+            
+            console.log('Service enabled:', serviceEnabled);
+            
+            // Update toggle checkbox
+            const toggle = document.getElementById('serviceToggle');
+            if (toggle) {
+                toggle.checked = serviceEnabled;
+                console.log('Toggle set to:', toggle.checked);
+            }
+            
+            // Update badge
+            updateServiceStatusUI();
+            
+            return serviceEnabled;
+        }
+
+        // Service state save করুন localStorage-এ
+        function saveServiceState() {
+            console.log('Saving service state:', serviceEnabled);
+            localStorage.setItem('rechargex_service_enabled', serviceEnabled);
+            
+            // verify
+            const saved = localStorage.getItem('rechargex_service_enabled');
+            console.log('Verified saved state:', saved);
+        }
+
+        // Toggle service on/off (ফিক্সড)
+        function toggleService() {
+            const toggle = document.getElementById('serviceToggle');
+            if (!toggle) return;
+            
+            serviceEnabled = toggle.checked;
+            console.log('Toggle changed to:', serviceEnabled);
+            
+            // Save to localStorage
+            saveServiceState();
+            
+            // Update UI
+            updateServiceStatusUI();
+            
+            // Update display
+            updateDisplayBasedOnService();
+            
+            // Show confirmation
+            alert(serviceEnabled ? "✅ সার্ভিস চালু করা হয়েছে" : "🔴 সার্ভিস বন্ধ করা হয়েছে");
+            
+            // Force re-render
+            if (serviceEnabled) {
+                renderProducts(true);
+            }
+        }
+
+        // Update service status UI elements
+        function updateServiceStatusUI() {
+            const badge = document.getElementById('serviceStatusBadge');
+            if (badge) {
+                badge.className = `toggle-status ${serviceEnabled ? 'on' : 'off'}`;
+                badge.innerHTML = serviceEnabled ? 'চালু আছে' : 'বন্ধ আছে';
+                console.log('Badge updated to:', badge.innerHTML);
+            }
+        }
+
+        // Update display based on service state (ফিক্সড)
+        function updateDisplayBasedOnService() {
+            const productsContainer = document.getElementById('productsContainer');
+            const serviceOffMessage = document.getElementById('serviceOffMessage');
+            const filterSection = document.querySelector('.filter-section');
+            const moreOffersContainer = document.getElementById('moreOffersContainer');
+            
+            console.log('Updating display, serviceEnabled:', serviceEnabled);
+            
+            if (!serviceEnabled) {
+                // Service OFF - hide products, show message
+                console.log('Service OFF - hiding products');
+                if (productsContainer) productsContainer.style.display = 'none';
+                if (moreOffersContainer) moreOffersContainer.style.display = 'none';
+                if (filterSection) {
+                    filterSection.style.opacity = '0.5';
+                    filterSection.style.pointerEvents = 'none';
+                }
+                if (serviceOffMessage) {
+                    serviceOffMessage.style.display = 'block';
+                    console.log('Service off message shown');
+                }
+            } else {
+                // Service ON - show products, hide message
+                console.log('Service ON - showing products');
+                if (productsContainer) productsContainer.style.display = 'block';
+                if (filterSection) {
+                    filterSection.style.opacity = '1';
+                    filterSection.style.pointerEvents = 'all';
+                }
+                if (serviceOffMessage) serviceOffMessage.style.display = 'none';
+                
+                // Re-render products
+                renderProducts(true);
+            }
+        }
+
         // ========== GITHUB GIST FUNCTIONS ==========
         
         function loadGithubConfig() {
             const savedConfig = localStorage.getItem('rechargex_github_config');
             if (savedConfig) {
                 githubConfig = JSON.parse(savedConfig);
-                document.getElementById('githubToken').value = githubConfig.token || '';
-                document.getElementById('gistId').value = githubConfig.gistId || '';
-                document.getElementById('gistFilename').value = githubConfig.filename || 'rechargex_products.json';
-            } else {
-                document.getElementById('githubToken').value = githubConfig.token;
             }
+            
+            const tokenInput = document.getElementById('githubToken');
+            const gistInput = document.getElementById('gistId');
+            const filenameInput = document.getElementById('gistFilename');
+            
+            if (tokenInput) tokenInput.value = githubConfig.token || '';
+            if (gistInput) gistInput.value = githubConfig.gistId || '';
+            if (filenameInput) filenameInput.value = githubConfig.filename || 'rechargex_products.json';
         }
 
         function saveGithubConfig() {
+            const tokenInput = document.getElementById('githubToken');
+            const gistInput = document.getElementById('gistId');
+            const filenameInput = document.getElementById('gistFilename');
+            
             githubConfig = {
-                token: document.getElementById('githubToken').value.trim(),
-                gistId: document.getElementById('gistId').value.trim(),
-                filename: document.getElementById('gistFilename').value.trim() || 'rechargex_products.json'
+                token: tokenInput ? tokenInput.value.trim() : '',
+                gistId: gistInput ? gistInput.value.trim() : '',
+                filename: filenameInput ? filenameInput.value.trim() : 'rechargex_products.json'
             };
             localStorage.setItem('rechargex_github_config', JSON.stringify(githubConfig));
         }
@@ -1798,11 +1910,50 @@
                     const data = await response.json();
                     updateGithubStatus('success', '✅ GitHub Gist সংযুক্ত আছে!');
                     document.getElementById('lastSyncTime').innerText = `সর্বশেষ আপডেট: ${new Date(data.updated_at).toLocaleString('bn-BD')}`;
+                    
+                    if (!data.files || !data.files[githubConfig.filename]) {
+                        await createGistFile();
+                    }
                 } else {
-                    updateGithubStatus('error', '❌ সংযোগ ব্যর্থ! টোকেন/গিস্ট আইডি চেক করুন।');
+                    updateGithubStatus('error', `❌ সংযোগ ব্যর্থ! স্ট্যাটাস: ${response.status}`);
                 }
             } catch (error) {
-                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা!');
+                console.error('Error:', error);
+                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা! বিস্তারিত: ' + error.message);
+            }
+        }
+
+        async function createGistFile() {
+            const data = {
+                products: products,
+                serviceEnabled: serviceEnabled,
+                lastUpdated: new Date().toISOString()
+            };
+            
+            const files = {};
+            files[githubConfig.filename] = {
+                content: JSON.stringify(data, null, 2)
+            };
+            
+            try {
+                const response = await fetch(`https://api.github.com/gists/${githubConfig.gistId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ files: files })
+                });
+                
+                if (response.ok) {
+                    updateGithubStatus('success', '✅ JSON ফাইল তৈরি হয়েছে!');
+                    document.getElementById('lastSyncTime').innerText = `সর্বশেষ সিঙ্ক: ${new Date().toLocaleString('bn-BD')}`;
+                } else {
+                    updateGithubStatus('error', `❌ ফাইল তৈরি ব্যর্থ! স্ট্যাটাস: ${response.status}`);
+                }
+            } catch (error) {
+                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা! ' + error.message);
             }
         }
 
@@ -1839,16 +1990,15 @@
                 });
                 
                 if (response.ok) {
-                    const result = await response.json();
                     updateGithubStatus('success', '✅ গিটহাবে আপলোড সফল!');
                     document.getElementById('lastSyncTime').innerText = `সর্বশেষ সিঙ্ক: ${new Date().toLocaleString('bn-BD')}`;
-                    
-                    alert('✅ ডাটা সফলভাবে GitHub Gist-এ আপলোড হয়েছে! এখন সব কাস্টমার আপডেটেড প্যাক দেখতে পাবেন।');
+                    alert('✅ ডাটা GitHub Gist-এ আপলোড হয়েছে! এখন সব কাস্টমার আপডেটেড প্যাক দেখতে পাবেন।');
                 } else {
-                    updateGithubStatus('error', '❌ আপলোড ব্যর্থ!');
+                    const errorData = await response.json();
+                    updateGithubStatus('error', `❌ আপলোড ব্যর্থ! ${errorData.message || response.status}`);
                 }
             } catch (error) {
-                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা!');
+                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা! ' + error.message);
             }
         }
 
@@ -1868,9 +2018,8 @@
                 if (response.ok) {
                     const data = await response.json();
                     
-                    const filename = githubConfig.filename;
-                    if (data.files && data.files[filename]) {
-                        const content = JSON.parse(data.files[filename].content);
+                    if (data.files && data.files[githubConfig.filename]) {
+                        const content = JSON.parse(data.files[githubConfig.filename].content);
                         
                         if (content.products) {
                             products = content.products;
@@ -1879,97 +2028,105 @@
                         
                         if (content.serviceEnabled !== undefined) {
                             serviceEnabled = content.serviceEnabled;
+                            saveServiceState();
+                            
                             const toggle = document.getElementById('serviceToggle');
                             if (toggle) toggle.checked = serviceEnabled;
-                            saveServiceState();
+                            updateServiceStatusUI();
+                            updateDisplayBasedOnService();
                         }
                         
                         renderProducts();
                         renderAdminTable();
-                        updateDisplayBasedOnService();
                         
                         updateGithubStatus('success', '✅ গিটহাব থেকে লোড সফল!');
                         document.getElementById('lastSyncTime').innerText = `সর্বশেষ সিঙ্ক: ${new Date().toLocaleString('bn-BD')}`;
                         
                         alert('✅ গিটহাব থেকে ডাটা লোড করা হয়েছে!');
                     } else {
-                        updateGithubStatus('error', `❌ ফাইল "${filename}" পাওয়া যায়নি!`);
+                        updateGithubStatus('error', `❌ ফাইল "${githubConfig.filename}" পাওয়া যায়নি!`);
                     }
                 } else {
-                    updateGithubStatus('error', '❌ গিস্ট লোড ব্যর্থ!');
+                    updateGithubStatus('error', `❌ গিস্ট লোড ব্যর্থ! স্ট্যাটাস: ${response.status}`);
                 }
             } catch (error) {
-                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা!');
+                updateGithubStatus('error', '❌ নেটওয়ার্ক সমস্যা! ' + error.message);
             }
         }
 
         function updateGithubStatus(type, message) {
             const statusDiv = document.getElementById('githubStatus');
-            const statusText = document.getElementById('githubStatusText');
+            if (!statusDiv) return;
             
             statusDiv.className = `github-status ${type}`;
             
             let icon = 'info-circle';
-            if (type === 'success') icon = 'check-circle';
-            if (type === 'error') icon = 'exclamation-circle';
-            if (type === 'warning') icon = 'exclamation-triangle';
+            let color = 'info';
+            if (type === 'success') { icon = 'check-circle'; color = 'success'; }
+            if (type === 'error') { icon = 'exclamation-circle'; color = 'danger'; }
+            if (type === 'warning') { icon = 'exclamation-triangle'; color = 'warning'; }
             
             statusDiv.innerHTML = `
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-${icon} text-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'warning'} me-2"></i>
+                    <i class="fas fa-${icon} text-${color} me-2"></i>
                     <span id="githubStatusText">${message}</span>
                 </div>
-                <small class="text-muted d-block mt-1" id="lastSyncTime">${document.getElementById('lastSyncTime').innerText}</small>
+                <small class="text-muted d-block mt-1" id="lastSyncTime">${document.getElementById('lastSyncTime')?.innerText || '-'}</small>
             `;
         }
 
-        // ========== LOAD PRODUCTS (WITH GITHUB PRIORITY) ==========
+        // ========== LOAD PRODUCTS ==========
         
         async function loadProducts() {
             showLoading(true);
             
-            // Try to load from GitHub first
-            const savedConfig = localStorage.getItem('rechargex_github_config');
-            if (savedConfig) {
-                githubConfig = JSON.parse(savedConfig);
-                document.getElementById('githubToken').value = githubConfig.token || '';
-                document.getElementById('gistId').value = githubConfig.gistId || '';
-                document.getElementById('gistFilename').value = githubConfig.filename || 'rechargex_products.json';
-                
-                if (githubConfig.gistId) {
-                    try {
-                        const response = await fetch(`https://api.github.com/gists/${githubConfig.gistId}`);
-                        if (response.ok) {
-                            const data = await response.json();
-                            const filename = githubConfig.filename;
-                            if (data.files && data.files[filename]) {
-                                const content = JSON.parse(data.files[filename].content);
-                                if (content.products) {
-                                    products = content.products;
-                                    if (content.serviceEnabled !== undefined) {
-                                        serviceEnabled = content.serviceEnabled;
-                                        const toggle = document.getElementById('serviceToggle');
-                                        if (toggle) toggle.checked = serviceEnabled;
-                                    }
-                                    saveProducts();
+            // GitHub থেকে ডাটা লোড করার চেষ্টা
+            if (githubConfig.gistId) {
+                try {
+                    const response = await fetch(`https://api.github.com/gists/${githubConfig.gistId}`);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        
+                        if (data.files && data.files[githubConfig.filename]) {
+                            const content = JSON.parse(data.files[githubConfig.filename].content);
+                            
+                            if (content.products && content.products.length > 0) {
+                                products = content.products;
+                                
+                                if (content.serviceEnabled !== undefined) {
+                                    serviceEnabled = content.serviceEnabled;
                                     saveServiceState();
-                                    updateGithubStatus('success', '✅ গিটহাব থেকে লোড সফল!');
-                                    document.getElementById('lastSyncTime').innerText = `সর্বশেষ আপডেট: ${new Date(data.updated_at).toLocaleString('bn-BD')}`;
-                                    showLoading(false);
-                                    return;
+                                    
+                                    const toggle = document.getElementById('serviceToggle');
+                                    if (toggle) toggle.checked = serviceEnabled;
                                 }
+                                
+                                saveProducts();
+                                
+                                updateGithubStatus('success', '✅ GitHub থেকে লোড সফল!');
+                                document.getElementById('lastSyncTime').innerText = `সর্বশেষ আপডেট: ${new Date(data.updated_at).toLocaleString('bn-BD')}`;
+                                
+                                showLoading(false);
+                                return;
                             }
                         }
-                    } catch (error) {
-                        console.log('GitHub load failed, using localStorage');
                     }
+                } catch (error) {
+                    console.log('GitHub load failed, using localStorage:', error);
                 }
             }
             
-            // Fallback to localStorage
+            // লোকাল স্টোরেজ থেকে লোড
             const savedProducts = localStorage.getItem('rechargex_products');
             if (savedProducts) {
-                products = JSON.parse(savedProducts);
+                try {
+                    products = JSON.parse(savedProducts);
+                    console.log('Loaded from localStorage:', products.length, 'products');
+                } catch (e) {
+                    console.error('Failed to parse localStorage products');
+                    generateSampleProducts();
+                }
             } else {
                 generateSampleProducts();
             }
@@ -1980,17 +2137,14 @@
         function showLoading(show) {
             const spinner = document.getElementById('loadingSpinner');
             const productsContainer = document.getElementById('productsContainer');
-            if (show) {
-                spinner.style.display = 'block';
-                productsContainer.style.display = 'none';
-            } else {
-                spinner.style.display = 'none';
-                productsContainer.style.display = 'block';
+            if (spinner && productsContainer) {
+                spinner.style.display = show ? 'block' : 'none';
+                productsContainer.style.display = show ? 'none' : 'block';
             }
         }
 
-        // Load products from localStorage or generate sample data
         function generateSampleProducts() {
+            console.log('Generating sample products...');
             const conditions = ['all_bd', 'check_number', 'special', 'corporate', 'student'];
             
             for(let i = 1; i <= 45; i++) {
@@ -2014,7 +2168,6 @@
                 const validity = validities[Math.floor(Math.random() * validities.length)];
                 const condition = conditions[Math.floor(Math.random() * conditions.length)];
                 
-                // Random price update date (between 1-30 days ago)
                 const daysAgo = Math.floor(Math.random() * 30) + 1;
                 const priceUpdateDate = Date.now() - (daysAgo * 24 * 60 * 60 * 1000);
                 
@@ -2035,89 +2188,12 @@
             saveProducts();
         }
 
-        // Save products to localStorage
         function saveProducts() {
             localStorage.setItem('rechargex_products', JSON.stringify(products));
         }
 
-        // Load service state from localStorage
-        function loadServiceState() {
-            const savedServiceState = localStorage.getItem('rechargex_service_enabled');
-            if (savedServiceState !== null) {
-                serviceEnabled = savedServiceState === 'true';
-            }
-            
-            // Update toggle checkbox
-            const toggle = document.getElementById('serviceToggle');
-            if (toggle) {
-                toggle.checked = serviceEnabled;
-            }
-            
-            // Update badge
-            updateServiceStatusUI();
-        }
-
-        // Save service state to localStorage
-        function saveServiceState() {
-            localStorage.setItem('rechargex_service_enabled', serviceEnabled);
-        }
-
-        // Toggle service on/off
-        function toggleService() {
-            const toggle = document.getElementById('serviceToggle');
-            serviceEnabled = toggle.checked;
-            
-            // Save to localStorage
-            saveServiceState();
-            
-            // Update UI
-            updateServiceStatusUI();
-            
-            // Re-render products or show service off message
-            updateDisplayBasedOnService();
-            
-            // Show confirmation
-            alert(serviceEnabled ? "✅ সার্ভিস চালু করা হয়েছে" : "🔴 সার্ভিস বন্ধ করা হয়েছে");
-        }
-
-        // Update service status UI elements
-        function updateServiceStatusUI() {
-            const badge = document.getElementById('serviceStatusBadge');
-            if (badge) {
-                badge.className = `toggle-status ${serviceEnabled ? 'on' : 'off'}`;
-                badge.innerHTML = serviceEnabled ? 'চালু আছে' : 'বন্ধ আছে';
-            }
-        }
-
-        // Update display based on service state
-        function updateDisplayBasedOnService() {
-            const productsContainer = document.getElementById('productsContainer');
-            const serviceOffMessage = document.getElementById('serviceOffMessage');
-            const filterSection = document.querySelector('.filter-section');
-            const moreOffersContainer = document.getElementById('moreOffersContainer');
-            
-            if (!serviceEnabled) {
-                // Hide products and filters, show service off message
-                if (productsContainer) productsContainer.style.display = 'none';
-                if (moreOffersContainer) moreOffersContainer.style.display = 'none';
-                if (filterSection) filterSection.style.opacity = '0.5';
-                if (filterSection) filterSection.style.pointerEvents = 'none';
-                if (serviceOffMessage) serviceOffMessage.style.display = 'block';
-            } else {
-                // Show products and filters, hide service off message
-                if (productsContainer) productsContainer.style.display = 'block';
-                if (filterSection) {
-                    filterSection.style.opacity = '1';
-                    filterSection.style.pointerEvents = 'all';
-                }
-                if (serviceOffMessage) serviceOffMessage.style.display = 'none';
-                
-                // Re-render products
-                renderProducts(true);
-            }
-        }
-
-        // State
+        // ========== FILTER STATE ==========
+        
         let filters = { 
             op: 'all', 
             cat: 'all', 
@@ -2158,9 +2234,11 @@
         }
 
         function toggleVolumeField() {
-            const cat = document.getElementById('popupCategory').value;
+            const cat = document.getElementById('popupCategory')?.value;
             const volumeLabel = document.getElementById('volumeLabel');
             const volumeInput = document.getElementById('popupData');
+            
+            if (!volumeLabel || !volumeInput) return;
             
             if(cat === 'minute') {
                 volumeLabel.innerText = 'মিনিট ভলিউম';
@@ -2171,7 +2249,6 @@
             }
         }
 
-        // Format date for display
         function formatDate(timestamp) {
             if (!timestamp) return 'N/A';
             const date = new Date(timestamp);
@@ -2179,7 +2256,6 @@
             const diffTime = Math.abs(now - date);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             
-            // If less than 24 hours, show hours
             if (diffDays === 0) {
                 const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
                 if (diffHours === 0) {
@@ -2188,13 +2264,9 @@
                 }
                 return `${diffHours} ঘন্টা আগে`;
             }
-            
-            // If less than 7 days, show days
             if (diffDays < 7) {
                 return `${diffDays} দিন আগে`;
             }
-            
-            // Otherwise show full date
             const day = date.getDate().toString().padStart(2, '0');
             const month = (date.getMonth() + 1).toString().padStart(2, '0');
             const year = date.getFullYear();
@@ -2203,7 +2275,6 @@
 
         // ========== RENDER PRODUCTS ==========
         function renderProducts(resetPagination = true) {
-            // If service is off, don't render products
             if (!serviceEnabled) {
                 updateDisplayBasedOnService();
                 return;
@@ -2214,6 +2285,8 @@
             }
             
             const container = document.getElementById('productContainer');
+            if (!container) return;
+            
             container.innerHTML = '';
             
             let filtered = products.filter(p => {
@@ -2235,7 +2308,6 @@
                 return opMatch && catMatch && priceMatch && validityMatch && searchMatch;
             });
 
-            // Apply sorting
             if(filters.sort === 'price-low') filtered.sort((a,b) => a.offerPrice - b.offerPrice);
             else if(filters.sort === 'price-high') filtered.sort((a,b) => b.offerPrice - a.offerPrice);
             else if(filters.sort === 'discount') filtered.sort((a,b) => calculateDiscount(b.regularPrice, b.offerPrice) - calculateDiscount(a.regularPrice, a.offerPrice));
@@ -2244,15 +2316,14 @@
             const totalCount = filtered.length;
             const productsToShow = filtered.slice(0, displayedProducts);
 
-            document.getElementById('resultCount').innerText = totalCount;
-            document.getElementById('displayCount').innerText = Math.min(displayedProducts, totalCount);
+            const resultCountEl = document.getElementById('resultCount');
+            const displayCountEl = document.getElementById('displayCount');
+            if (resultCountEl) resultCountEl.innerText = totalCount;
+            if (displayCountEl) displayCountEl.innerText = Math.min(displayedProducts, totalCount);
 
-            // Show/hide more offers button
             const moreBtnContainer = document.getElementById('moreOffersContainer');
-            if(displayedProducts >= totalCount) {
-                moreBtnContainer.style.display = 'none';
-            } else {
-                moreBtnContainer.style.display = 'block';
+            if (moreBtnContainer) {
+                moreBtnContainer.style.display = displayedProducts >= totalCount ? 'none' : 'block';
             }
 
             if(productsToShow.length === 0) {
@@ -2313,14 +2384,13 @@
             updateActiveFilters();
         }
 
-        // Load more products
         function loadMoreProducts() {
             if (!serviceEnabled) return;
             displayedProducts += productsPerPage;
             renderProducts(false);
         }
 
-        // ========== FILTER FUNCTIONS ==========
+        // Filter functions
         function applyOperator(op, element) {
             if (!serviceEnabled) return;
             document.querySelectorAll('.operator-item').forEach(el => el.classList.remove('active'));
@@ -2339,18 +2409,26 @@
 
         function applyValidityFilter() {
             if (!serviceEnabled) return;
-            filters.validity = document.getElementById('validitySelect').value;
-            renderProducts();
+            const validitySelect = document.getElementById('validitySelect');
+            if (validitySelect) {
+                filters.validity = validitySelect.value;
+                renderProducts();
+            }
         }
 
         function applySort() {
             if (!serviceEnabled) return;
-            filters.sort = document.getElementById('sortSelect').value;
-            renderProducts();
+            const sortSelect = document.getElementById('sortSelect');
+            if (sortSelect) {
+                filters.sort = sortSelect.value;
+                renderProducts();
+            }
         }
 
         function updateActiveFilters() {
             const container = document.getElementById('activeFilters');
+            if (!container) return;
+            
             container.innerHTML = '';
             
             if(filters.op !== 'all') {
@@ -2408,27 +2486,30 @@
             }
             if(type === 'price') {
                 filters.maxPrice = 3000;
-                document.querySelectorAll('.price-btn').forEach(b => {
-                    if(b.dataset.price === 'all') b.classList.add('active');
-                    else b.classList.remove('active');
-                });
             }
             if(type === 'validity') {
                 filters.validity = 'all';
-                document.getElementById('validitySelect').value = 'all';
+                const validitySelect = document.getElementById('validitySelect');
+                if (validitySelect) validitySelect.value = 'all';
             }
             if(type === 'search') {
                 filters.search = '';
-                document.getElementById('searchInput').value = '';
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) searchInput.value = '';
             }
             renderProducts();
         }
 
         function resetAllFilters() {
             filters = { op: 'all', cat: 'all', search: '', sort: 'popular', maxPrice: 3000, validity: 'all' };
-            document.getElementById('searchInput').value = '';
-            document.getElementById('validitySelect').value = 'all';
-            document.getElementById('sortSelect').value = 'popular';
+            
+            const searchInput = document.getElementById('searchInput');
+            const validitySelect = document.getElementById('validitySelect');
+            const sortSelect = document.getElementById('sortSelect');
+            
+            if (searchInput) searchInput.value = '';
+            if (validitySelect) validitySelect.value = 'all';
+            if (sortSelect) sortSelect.value = 'popular';
             
             document.querySelectorAll('.operator-item').forEach(el => {
                 if(el.dataset.op === 'all') el.classList.add('active');
@@ -2440,29 +2521,27 @@
                 else el.classList.remove('active');
             });
             
-            document.querySelectorAll('.price-btn').forEach(b => {
-                if(b.dataset.price === 'all') b.classList.add('active');
-                else b.classList.remove('active');
-            });
-            
             renderProducts();
         }
 
         // Search with debounce
         let searchTimeout;
-        document.getElementById('searchInput')?.addEventListener('input', (e) => {
-            if (!serviceEnabled) return;
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                filters.search = e.target.value;
-                renderProducts();
-            }, 300);
-        });
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                if (!serviceEnabled) return;
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    filters.search = e.target.value;
+                    renderProducts();
+                }, 300);
+            });
+        }
 
         // ========== CHECKOUT & WHATSAPP ==========
         function openCheckout(id) {
             if (!serviceEnabled) {
-                alert("🔴 সার্ভিস বর্তমানে বন্ধ আছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।");
+                alert("🔴 সার্ভিস বর্তমানে বন্ধ আছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন.");
                 return;
             }
             
@@ -2473,30 +2552,37 @@
             const savings = selectedPack.regularPrice - selectedPack.offerPrice;
             const conditionText = getConditionText(selectedPack.condition);
             
-            document.getElementById('modalOpBadge').innerText = selectedPack.operator;
-            document.getElementById('modalPackName').innerText = selectedPack.packName;
-            document.getElementById('modalPrice').innerText = `৳${selectedPack.offerPrice}`;
-            document.getElementById('modalSavings').innerHTML = savings > 0 ? `ডিসকাউন্ট ৳${savings} (${discount}% ছাড়)` : '';
-            document.getElementById('modalCondition').innerHTML = `<span class="badge bg-primary">${conditionText}</span>`;
+            const modalOpBadge = document.getElementById('modalOpBadge');
+            const modalPackName = document.getElementById('modalPackName');
+            const modalPrice = document.getElementById('modalPrice');
+            const modalSavings = document.getElementById('modalSavings');
+            const modalCondition = document.getElementById('modalCondition');
             
-            modalInstance.show();
+            if (modalOpBadge) modalOpBadge.innerText = selectedPack.operator;
+            if (modalPackName) modalPackName.innerText = selectedPack.packName;
+            if (modalPrice) modalPrice.innerText = `৳${selectedPack.offerPrice}`;
+            if (modalSavings) modalSavings.innerHTML = savings > 0 ? `ডিসকাউন্ট ৳${savings} (${discount}% ছাড়)` : '';
+            if (modalCondition) modalCondition.innerHTML = `<span class="badge bg-primary">${conditionText}</span>`;
+            
+            if (modalInstance) {
+                modalInstance.show();
+            }
         }
 
         function copyNumber() {
-            navigator.clipboard.writeText("01927671975");
-            alert("নাম্বার কপি করা হয়েছে! ✅");
+            navigator.clipboard.writeText("01927671975").then(() => {
+                alert("নাম্বার কপি করা হয়েছে! ✅");
+            }).catch(() => {
+                alert("কপি ব্যর্থ! ম্যানুয়ালি কপি করুন: 01927671975");
+            });
         }
 
         function confirmOrderWA() {
             if(!selectedPack) return;
             
-            const phone = document.getElementById('userPhone').value || "N/A";
-            const trx = document.getElementById('trxId').value || "Pending";
-            const method = document.getElementById('paymentMethod').value;
-            const savings = selectedPack.regularPrice - selectedPack.offerPrice;
-            const conditionText = getConditionText(selectedPack.condition);
+            const phone = document.getElementById('userPhone')?.value || "N/A";
+            const trx = document.getElementById('trxId')?.value || "Pending";
             
-            // Smart formatted message with emojis
             const message = `🛒 *নতুন অর্ডার*\n\n` +
                 `👤 *অফার নাম্বার:* ${phone}\n` +
                 `📦 *প্যাক:* ${selectedPack.dataVolume} ${selectedPack.packName}\n` +
@@ -2506,14 +2592,12 @@
                 `🧾 *লাস্ট নাম্বার:* ${trx}\n\n` +
                 `✅ অনুগ্রহ করে আমার অর্ডার কনফার্ম করুন! 🙏`;
             
-            // Encode for URL
             const encodedMessage = encodeURIComponent(message);
-            
-            // Open WhatsApp
             window.open(`https://wa.me/8801927671975?text=${encodedMessage}`, '_blank');
             
-            // Close modal
-            bootstrap.Modal.getInstance(document.getElementById('checkoutModal')).hide();
+            if (modalInstance) {
+                modalInstance.hide();
+            }
         }
 
         // ========== ADMIN FUNCTIONS ==========
@@ -2523,13 +2607,25 @@
                 return; 
             }
             editingId = null;
-            document.getElementById('popupTitle').innerText = 'নতুন প্যাক যোগ করুন';
-            document.getElementById('productForm').reset();
-            document.getElementById('popupOperator').value = 'Grameenphone';
-            document.getElementById('popupCategory').value = 'internet';
-            document.getElementById('popupCondition').value = 'all_bd';
+            const popupTitle = document.getElementById('popupTitle');
+            if (popupTitle) popupTitle.innerText = 'নতুন প্যাক যোগ করুন';
+            
+            const productForm = document.getElementById('productForm');
+            if (productForm) productForm.reset();
+            
+            const popupOperator = document.getElementById('popupOperator');
+            if (popupOperator) popupOperator.value = 'Grameenphone';
+            
+            const popupCategory = document.getElementById('popupCategory');
+            if (popupCategory) popupCategory.value = 'internet';
+            
+            const popupCondition = document.getElementById('popupCondition');
+            if (popupCondition) popupCondition.value = 'all_bd';
+            
             toggleVolumeField();
-            document.getElementById('productPopup').style.display = 'flex';
+            
+            const productPopup = document.getElementById('productPopup');
+            if (productPopup) productPopup.style.display = 'flex';
         }
 
         function openEditPopup(id) {
@@ -2540,37 +2636,56 @@
             const p = products.find(x => x.id === id);
             if(!p) return;
             editingId = id;
-            document.getElementById('popupTitle').innerText = 'প্যাক এডিট করুন';
-            document.getElementById('popupOperator').value = p.operator;
-            document.getElementById('popupCategory').value = p.cat;
-            document.getElementById('popupPackName').value = p.packName;
-            document.getElementById('popupData').value = p.dataVolume;
-            document.getElementById('popupValidity').value = p.validity;
-            document.getElementById('popupRegularPrice').value = p.regularPrice;
-            document.getElementById('popupOfferPrice').value = p.offerPrice;
-            document.getElementById('popupCondition').value = p.condition || 'all_bd';
+            
+            const popupTitle = document.getElementById('popupTitle');
+            if (popupTitle) popupTitle.innerText = 'প্যাক এডিট করুন';
+            
+            const popupOperator = document.getElementById('popupOperator');
+            if (popupOperator) popupOperator.value = p.operator;
+            
+            const popupCategory = document.getElementById('popupCategory');
+            if (popupCategory) popupCategory.value = p.cat;
+            
+            const popupPackName = document.getElementById('popupPackName');
+            if (popupPackName) popupPackName.value = p.packName;
+            
+            const popupData = document.getElementById('popupData');
+            if (popupData) popupData.value = p.dataVolume;
+            
+            const popupValidity = document.getElementById('popupValidity');
+            if (popupValidity) popupValidity.value = p.validity;
+            
+            const popupRegularPrice = document.getElementById('popupRegularPrice');
+            if (popupRegularPrice) popupRegularPrice.value = p.regularPrice;
+            
+            const popupOfferPrice = document.getElementById('popupOfferPrice');
+            if (popupOfferPrice) popupOfferPrice.value = p.offerPrice;
+            
+            const popupCondition = document.getElementById('popupCondition');
+            if (popupCondition) popupCondition.value = p.condition || 'all_bd';
+            
             toggleVolumeField();
-            document.getElementById('productPopup').style.display = 'flex';
+            
+            const productPopup = document.getElementById('productPopup');
+            if (productPopup) productPopup.style.display = 'flex';
         }
 
         function closePopup() {
-            document.getElementById('productPopup').style.display = 'none';
+            const productPopup = document.getElementById('productPopup');
+            if (productPopup) productPopup.style.display = 'none';
         }
 
         function saveProduct(e) {
             e.preventDefault();
             
-            // Check if price has changed
             let priceUpdateDate = Date.now();
             
             if (editingId !== null) {
                 const existingProduct = products.find(p => p.id === editingId);
-                if (existingProduct) {
-                    // If price hasn't changed, keep the old update date
-                    if (existingProduct.regularPrice === parseInt(document.getElementById('popupRegularPrice').value) &&
-                        existingProduct.offerPrice === parseInt(document.getElementById('popupOfferPrice').value)) {
-                        priceUpdateDate = existingProduct.priceUpdateDate;
-                    }
+                if (existingProduct && 
+                    existingProduct.regularPrice === parseInt(document.getElementById('popupRegularPrice').value) &&
+                    existingProduct.offerPrice === parseInt(document.getElementById('popupOfferPrice').value)) {
+                    priceUpdateDate = existingProduct.priceUpdateDate;
                 }
             }
             
@@ -2584,20 +2699,18 @@
                 offerPrice: parseInt(document.getElementById('popupOfferPrice').value),
                 condition: document.getElementById('popupCondition').value,
                 priceUpdateDate: priceUpdateDate,
-                date: Date.now()
+                date: Date.now(),
+                id: editingId || Date.now()
             };
 
             if(editingId === null) {
-                newData.id = Date.now();
                 products.unshift(newData);
             } else {
                 const idx = products.findIndex(p => p.id === editingId);
-                if(idx !== -1) products[idx] = { ...products[idx], ...newData, id: editingId };
+                if(idx !== -1) products[idx] = newData;
             }
             
-            // Save to localStorage
             saveProducts();
-            
             renderProducts();
             renderAdminTable();
             closePopup();
@@ -2608,23 +2721,21 @@
             if(!isAdminLoggedIn) return;
             if(confirm("এই প্যাকটি ডিলিট করতে চান?")) {
                 products = products.filter(p => p.id !== id);
-                
-                // Save to localStorage
                 saveProducts();
-                
                 renderProducts();
                 renderAdminTable();
             }
         }
 
         function renderAdminTable() {
+            const adminTable = document.getElementById('adminTable');
+            if (!adminTable) return;
+            
             let html = '';
             products.slice(0, 20).forEach(p => {
                 const discount = calculateDiscount(p.regularPrice, p.offerPrice);
                 const conditionText = getConditionText(p.condition);
                 const updateDate = formatDate(p.priceUpdateDate);
-                
-                // Determine if price was updated recently (within last 7 days)
                 const isRecent = p.priceUpdateDate && (Date.now() - p.priceUpdateDate) < 7 * 24 * 60 * 60 * 1000;
                 
                 html += `<tr>
@@ -2652,7 +2763,7 @@
                     </td>
                 </tr>`;
             });
-            document.getElementById('adminTable').innerHTML = html;
+            adminTable.innerHTML = html;
         }
 
         // ========== ADMIN LOGIN FUNCTIONS ==========
@@ -2661,35 +2772,32 @@
             if (savedLogin === 'true') {
                 isAdminLoggedIn = true;
                 
-                // Update footer button
                 const footerBtn = document.getElementById('footerAdminBtn');
-                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
-                footerBtn.style.color = '#ef4444';
+                if (footerBtn) {
+                    footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
+                    footerBtn.style.color = '#ef4444';
+                }
                 
-                // Show admin panel
-                document.getElementById('adminPanel').style.display = 'block';
+                const adminPanel = document.getElementById('adminPanel');
+                if (adminPanel) adminPanel.style.display = 'block';
+                
                 renderAdminTable();
-                
-                // Load service state and update toggle
-                loadServiceState();
-                
-                // Load GitHub config
                 loadGithubConfig();
             }
         }
 
         function openAdminLoginModal() {
             if(isAdminLoggedIn) {
-                // If already logged in, logout instead
                 logoutAdmin();
             } else {
-                // Show login modal
-                document.getElementById('adminLoginModal').style.display = 'flex';
+                const adminLoginModal = document.getElementById('adminLoginModal');
+                if (adminLoginModal) adminLoginModal.style.display = 'flex';
             }
         }
 
         function closeAdminLoginModal() {
-            document.getElementById('adminLoginModal').style.display = 'none';
+            const adminLoginModal = document.getElementById('adminLoginModal');
+            if (adminLoginModal) adminLoginModal.style.display = 'none';
         }
 
         function adminLoginWithPassword(event) {
@@ -2698,28 +2806,21 @@
             const username = document.getElementById('adminUsername').value;
             const password = document.getElementById('adminPassword').value;
             
-            // Check credentials
             if(username === 'admin' && password === '@Rk9748') {
                 isAdminLoggedIn = true;
-                
-                // Save login state to localStorage
                 localStorage.setItem('rechargex_admin_loggedin', 'true');
-                
                 closeAdminLoginModal();
                 
-                // Update footer button
                 const footerBtn = document.getElementById('footerAdminBtn');
-                footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
-                footerBtn.style.color = '#ef4444';
+                if (footerBtn) {
+                    footerBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> অ্যাডমিন লগআউট';
+                    footerBtn.style.color = '#ef4444';
+                }
                 
-                // Show admin panel
-                document.getElementById('adminPanel').style.display = 'block';
+                const adminPanel = document.getElementById('adminPanel');
+                if (adminPanel) adminPanel.style.display = 'block';
+                
                 renderAdminTable();
-                
-                // Load service state
-                loadServiceState();
-                
-                // Load GitHub config
                 loadGithubConfig();
                 
                 alert("✅ অ্যাডমিন লগইন সফল!");
@@ -2730,17 +2831,16 @@
 
         function logoutAdmin() {
             isAdminLoggedIn = false;
-            
-            // Remove login state from localStorage
             localStorage.removeItem('rechargex_admin_loggedin');
             
-            // Update footer button
             const footerBtn = document.getElementById('footerAdminBtn');
-            footerBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন';
-            footerBtn.style.color = '#94a3b8';
+            if (footerBtn) {
+                footerBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> অ্যাডমিন লগইন';
+                footerBtn.style.color = '#94a3b8';
+            }
             
-            // Hide admin panel
-            document.getElementById('adminPanel').style.display = 'none';
+            const adminPanel = document.getElementById('adminPanel');
+            if (adminPanel) adminPanel.style.display = 'none';
             
             alert("👋 অ্যাডমিন লগআউট করা হয়েছে");
         }
@@ -2757,37 +2857,61 @@
 
         function toggleMobileMenu() {
             const navMenu = document.querySelector('.nav-menu');
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            if (navMenu) {
+                navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            }
         }
 
-        // Close popup when clicking outside
-        document.getElementById('productPopup')?.addEventListener('click', (e) => {
-            if(e.target.id === 'productPopup') closePopup();
-        });
+        // Close popup on outside click
+        const productPopup = document.getElementById('productPopup');
+        if (productPopup) {
+            productPopup.addEventListener('click', (e) => {
+                if(e.target.id === 'productPopup') closePopup();
+            });
+        }
 
-        document.getElementById('adminLoginModal')?.addEventListener('click', (e) => {
-            if(e.target.id === 'adminLoginModal') closeAdminLoginModal();
-        });
+        const adminLoginModal = document.getElementById('adminLoginModal');
+        if (adminLoginModal) {
+            adminLoginModal.addEventListener('click', (e) => {
+                if(e.target.id === 'adminLoginModal') closeAdminLoginModal();
+            });
+        }
 
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Page loaded, initializing...');
             showLoading(true);
             
-            await loadProducts(); // This will try GitHub first, then localStorage
+            // প্রথমে service state লোড করুন
             loadServiceState();
+            console.log('Initial service state:', serviceEnabled);
+            
+            // GitHub config লোড করুন
+            loadGithubConfig();
+            
+            // Products লোড করুন
+            await loadProducts();
+            
+            // Admin login চেক করুন
             checkAdminLogin();
+            
+            // Display আপডেট করুন
             updateDisplayBasedOnService();
             
+            // Render products if service is enabled
             if (serviceEnabled) {
                 renderProducts();
             }
             
-            modalInstance = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            // Modal initialize
+            const checkoutModal = document.getElementById('checkoutModal');
+            if (checkoutModal) {
+                modalInstance = new bootstrap.Modal(checkoutModal);
+            }
             
             showLoading(false);
+            console.log('Initialization complete, service enabled:', serviceEnabled);
         });
     </script>
 </body>
 </html>
-
-
